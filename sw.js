@@ -1,5 +1,5 @@
-const CACHE = "kidstube-v1";
-const SHELL = ["./", "index.html", "data.json", "i18n.js", "manifest.webmanifest", "icon.svg", "qr-logicalcode.svg", "icon-192.png", "icon-512.png"];
+const CACHE = "lolotube-v1";
+const SHELL = ["./", "index.html", "data.json", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

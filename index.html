@@ -1,858 +1,363 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-theme="light" translate="no" class="notranslate">
+<html lang="ar" dir="rtl" translate="no" class="notranslate">
 <head>
 <meta charset="utf-8">
 <meta name="google" content="notranslate">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>المسك المختوم — نافذتك على المحتوى الإسلامي في يوتيوب</title>
-<meta name="description" content="المسك المختوم: شاشة عرض واحدة للمحتوى الإسلامي في يوتيوب — القرآن الكريم، التفسير، الحديث، الخطب، الدعوة، السيرة، الأذكار، وركن الأطفال.">
-<meta name="theme-color" content="#f5f1e6">
-<script>(function(){var L="ar";try{L=JSON.parse(localStorage.getItem("misk-lang")||'"ar"')}catch(e){} try{var q=new URLSearchParams(location.search).get("lang"); if(q==="de"||q==="en"||q==="ar"){L=q; localStorage.setItem("misk-lang",JSON.stringify(q));}}catch(e){} if(L!=="en"&&L!=="de")L="ar"; window.MISK_LANG=L; if(L!=="ar"){var d=document.documentElement;d.lang=L;d.dir="ltr";}})();</script>
-<script src="i18n.js"></script>
+<title>LoLoTube لولوتيوب — قنوات هادفة للأطفال</title>
+<meta name="description" content="لولوتيوب: يوتيوب مفلتر للأطفال فيه القنوات الهادفة فقط — دينية، أخلاقية، فكرية، تعليمية، ترفيهية، رياضية، ولغات ونطق.">
+<meta name="theme-color" content="#a855f7">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Reem+Kufi:wght@600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07140f; --bg2:#0d231b; --card:rgba(255,255,255,.055); --line:rgba(255,255,255,.11);
-  --text:#f3f7f4; --muted:#a9bdb3; --gold:#e7c36a; --gold2:#b8892f; --chip:rgba(255,255,255,.08);
-  --shadow:0 14px 34px rgba(0,0,0,.38); --bar:62px;
-  --shine:linear-gradient(110deg,#a8791f 0%,#f6dc8f 22%,#fff6cf 38%,#d8a94a 55%,#fff1bd 72%,#b8892f 100%);
+  --bg:#fdf6ff; --card:#ffffff; --text:#2b1d4a; --muted:#7a6f93; --line:rgba(91,61,160,.12);
+  --p1:#7c3aed; --p2:#ec4899;
+  --rainbow:linear-gradient(90deg,#f43f5e,#f59e0b,#eab308,#22c55e,#06b6d4,#6366f1,#d946ef,#f43f5e);
+  --shadow:0 10px 26px rgba(91,61,160,.16); --bar:58px; --nav:64px;
 }
-:root[data-theme="light"]{
-  --bg:#f5f1e6; --bg2:#ece5d2; --card:#ffffff; --line:rgba(20,50,40,.14);
-  --text:#12261f; --muted:#56695f; --gold:#9a6d14; --gold2:#b8892f; --chip:rgba(20,60,45,.07);
-  --shadow:0 12px 28px rgba(40,60,50,.14);
-  --shine:linear-gradient(110deg,#7a5208 0%,#c9992f 22%,#e9c665 38%,#9a6d14 55%,#d9b04a 72%,#7a5208 100%);
-}
-*{box-sizing:border-box}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html,body{margin:0}
 html{overflow-x:clip}
-body{margin:0; font-family:"Tajawal",system-ui,"Segoe UI",Tahoma,sans-serif; color:var(--text); background:var(--bg);
-  min-height:100vh; line-height:1.55; -webkit-tap-highlight-color:transparent}
-body::before{content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:
-  radial-gradient(900px 500px at 85% -10%, rgba(231,195,106,.14), transparent 60%),
-  radial-gradient(800px 520px at 0% 10%, rgba(16,185,129,.14), transparent 60%),
-  linear-gradient(180deg,var(--bg),var(--bg2))}
-a{color:inherit; text-decoration:none}
-button,input,select{font-family:inherit; color:inherit}
+body{font-family:"Baloo Bhaijaan 2",system-ui,"Segoe UI",Tahoma,sans-serif; color:var(--text); min-height:100vh; overflow-x:hidden;
+  background:radial-gradient(1200px 700px at 10% -10%,#ffd6f3 0,transparent 60%),radial-gradient(1000px 700px at 110% 10%,#d4e4ff 0,transparent 60%),radial-gradient(900px 600px at 50% 110%,#d6ffe9 0,transparent 60%),#f3ecff}
+button,input{font-family:inherit; color:inherit}
+
+/* خلفية سحرية: فقاعات ونجوم */
+.sky{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden}
+.sky i{position:absolute; bottom:-80px; border-radius:50%; opacity:.5; animation:float linear infinite; background:radial-gradient(circle at 30% 30%,#fff,var(--c) 62%)}
+.sky b{position:absolute; color:#fbbf24; animation:twinkle 3s ease-in-out infinite; font-weight:400}
+@keyframes float{to{transform:translateY(-125vh) translateX(var(--dx))}}
+@keyframes twinkle{50%{opacity:.2; transform:scale(.6) rotate(25deg)}}
+
+/* إطار التطبيق: الهاتف هو الافتراضي */
+.app{position:relative; z-index:1; margin:0 auto; min-height:100vh; background:var(--bg); display:flex; flex-direction:column}
+body.phone .app{max-width:430px; box-shadow:0 30px 80px rgba(91,61,160,.25)}
+@media (min-width:600px){ body.phone .app{margin:16px auto; min-height:calc(100vh - 32px); border-radius:40px; border:10px solid #1f1536; overflow:clip} }
+body.desk .app{max-width:none}
 
 /* الشريط العلوي */
-.bar{position:sticky; top:0; z-index:30; height:var(--bar); background:var(--bg); border-bottom:1px solid var(--line)}
-.bar-in{max-width:1560px; height:100%; margin:0 auto; padding:0 14px; display:flex; align-items:center; gap:10px}
-.brand{display:flex; align-items:center; gap:9px; cursor:pointer; background:none; border:0; padding:0; flex:none}
-.brand img{width:40px; height:40px; border-radius:11px; animation:glow 2.2s ease-in-out infinite}
-.brand b.gold{background-image:linear-gradient(105deg,#b8892f 0%,#e7c36a 30%,#fffbe6 46%,#ffffff 50%,#fffbe6 54%,#e7c36a 70%,#b8892f 100%); background-size:250% 100%; animation:shine 2.6s linear infinite, glowT 2.2s ease-in-out infinite}
-@keyframes glow{0%,100%{filter:drop-shadow(0 0 3px rgba(231,195,106,.45)) brightness(1)}50%{filter:drop-shadow(0 0 13px rgba(255,236,170,.95)) brightness(1.25)}}
-@keyframes glowT{0%,100%{filter:drop-shadow(0 0 2px rgba(231,195,106,.35))}50%{filter:drop-shadow(0 0 10px rgba(255,236,170,.85))}}
-.brand b{font-family:"Reem Kufi","Tajawal",sans-serif; font-weight:700; font-size:24px; white-space:nowrap; line-height:1.2}
-.gold{background:var(--shine); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 5s linear infinite}
-@keyframes shine{to{background-position:-220% 0}}
-.find{flex:1; min-width:0; max-width:620px; margin-inline:auto; display:flex; align-items:center; gap:8px}
-.fbox{flex:1; min-width:0; height:44px; display:flex; align-items:center; gap:9px; padding:0 16px; border-radius:999px; border:2px solid transparent;
-  background:linear-gradient(var(--bg2),var(--bg2)) padding-box, var(--shine) border-box; background-size:auto, 220% 100%; animation:shineB 4s linear infinite;
-  box-shadow:0 0 14px rgba(231,195,106,.22), inset 0 1px 0 rgba(255,255,255,.06); transition:box-shadow .2s}
-@keyframes shineB{to{background-position:0 0, -220% 0}}
-.fbox:focus-within{box-shadow:0 0 0 3px rgba(231,195,106,.22), 0 0 24px rgba(231,195,106,.55)}
-.fbox svg{flex:none; color:var(--gold)}
-.find input{flex:1; min-width:0; background:none; border:0; outline:0; padding:0; font-size:16px; font-weight:500; color:var(--text)}
-.find input::placeholder{color:color-mix(in srgb,var(--gold) 55%,var(--muted))}
-.find input::-webkit-search-cancel-button{filter:grayscale(1) brightness(1.6); cursor:pointer}
-.fgo{flex:none; height:44px; padding:0 22px; border:0; border-radius:999px; cursor:pointer; display:inline-flex; align-items:center; gap:7px; font-weight:800; font-size:16px; color:#2a1c02;
-  background:var(--shine); background-size:220% 100%; animation:shine 3s linear infinite; box-shadow:0 0 0 1px #fff3c4 inset, 0 6px 18px rgba(216,169,74,.45); transition:transform .15s, filter .15s}
-.fgo:hover{transform:translateY(-2px); filter:brightness(1.1)} .fgo:active{transform:scale(.96)}
-.ib{flex:none; width:42px; height:42px; border-radius:13px; border:1px solid var(--line); background:var(--chip); font-size:18px; cursor:pointer; display:grid; place-items:center; transition:.18s}
-.ib:hover{border-color:var(--gold); transform:translateY(-2px)}
+.top{position:sticky; top:0; z-index:30; height:var(--bar); flex:none; display:flex; align-items:center; gap:8px; padding:0 12px; background:rgba(253,246,255,.9); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+.logo{display:flex; align-items:center; gap:7px; border:0; background:none; padding:0; cursor:pointer; direction:ltr}
+.logo svg{width:38px; height:38px; animation:wob 3.5s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg) scale(1.07)}}
+.logo b{font-size:26px; font-weight:800; line-height:1; background:var(--rainbow); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:rain 6s linear infinite}
+@keyframes rain{to{background-position:-300% 0}}
+.sp{flex:1}
+.ib{width:40px; height:40px; border-radius:50%; border:0; background:#fff; box-shadow:0 3px 10px rgba(91,61,160,.15); font-size:18px; cursor:pointer; display:grid; place-items:center; transition:transform .15s; flex:none}
+.ib:active{transform:scale(.88)}
 
-/* المسرح: أقسام يمين + شاشة + أقسام يسار */
-.stage{max-width:1560px; margin:0 auto; padding:14px 14px 0; display:grid; grid-template-columns:196px minmax(0,1fr) 196px; gap:12px; align-items:start}
-.side{position:sticky; top:calc(var(--bar) + 14px); max-height:calc(100vh - var(--bar) - 28px); overflow-y:auto; overflow-x:hidden; display:flex; flex-direction:column; gap:6px; padding:3px 8px; scrollbar-width:none}
-.side::-webkit-scrollbar{display:none}
-.cat{position:relative; overflow:hidden; flex:none; border:0; cursor:pointer; text-align:start; color:#fff; border-radius:12px; padding:6px 10px; display:flex; align-items:center; gap:8px;
-  background:linear-gradient(140deg,var(--a),var(--b)); box-shadow:0 6px 16px color-mix(in srgb,var(--b) 40%,transparent); transition:transform .18s, filter .18s, box-shadow .18s}
-.cat::after{content:""; position:absolute; inset:auto auto -34px -26px; width:90px; height:90px; border-radius:50%; background:rgba(255,255,255,.14)}
-.cat:hover{transform:scale(1.03); filter:saturate(1.2) brightness(1.06)}
-.cat .ic{font-size:19px; flex:none; position:relative; z-index:1}
-.cat b{font-size:13.5px; font-weight:800; position:relative; z-index:1; line-height:1.3}
-.cat.on{box-shadow:0 0 0 3px var(--gold), 0 10px 22px color-mix(in srgb,var(--b) 60%,transparent)}
+/* البحث */
+.search{display:none; position:sticky; top:var(--bar); z-index:29; padding:8px 12px; background:rgba(253,246,255,.96); border-bottom:1px solid var(--line)}
+.search.open{display:flex; gap:8px}
+.search input{flex:1; min-width:0; height:44px; border-radius:999px; border:2.5px solid transparent; padding:0 16px; font-size:16px; outline:0; background:linear-gradient(#fff,#fff) padding-box, var(--rainbow) border-box}
 
-.mid{min-width:0}
-.screenBox{position:sticky; top:var(--bar); z-index:20; background:var(--bg); padding:10px 0 8px; margin-top:-14px}
-.screen{position:relative; flex:0 1 calc((100vh - var(--bar) - 196px) * 16 / 9); min-width:0; aspect-ratio:16/9; background:#000; border-radius:20px; overflow:hidden;
-  border:2px solid color-mix(in srgb,var(--gold) 70%,transparent); box-shadow:0 0 0 6px rgba(231,195,106,.09), 0 22px 50px rgba(0,0,0,.55)}
-.screen iframe,.screen #yt{position:absolute; inset:0; width:100%; height:100%; border:0}
-#sndHint{position:absolute; top:10px; inset-inline:0; margin:auto; width:max-content; max-width:92%; z-index:5; pointer-events:none; border-radius:999px; padding:7px 16px; font-weight:800; font-size:14.5px; color:#2a1c02; background:var(--shine); background-size:220% 100%; animation:shine 3s linear infinite; box-shadow:0 6px 18px rgba(0,0,0,.5)}
-.capbar{position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:6; display:flex; gap:7px; padding:5px 8px; border-radius:999px; background:rgba(0,0,0,.6); box-shadow:0 4px 14px rgba(0,0,0,.5); opacity:.9; transition:opacity .2s}
-.capbar:hover{opacity:1}
-.capbar button{width:32px; height:32px; border-radius:50%; padding:0; overflow:hidden; cursor:pointer; border:2px solid rgba(255,255,255,.4); background:#1c1c1c; color:#fff; font-weight:800; font-size:14px; display:grid; place-items:center; transition:.15s}
-.capbar button svg{width:100%; height:100%; display:block} .capbar button:hover{transform:scale(1.12); border-color:#fff}
-.capbar button.on{border-color:#f6dc8f; box-shadow:0 0 0 2px #e7c36a, 0 0 12px rgba(231,195,106,.9)}
-.poster{position:absolute; inset:0; display:grid; place-content:center; text-align:center; padding:18px; color:#f3f7f4;
-  background:radial-gradient(600px 300px at 50% 0,rgba(16,185,129,.35),transparent 70%),linear-gradient(160deg,#0b2a20,#04100c)}
-.poster .aya{font-family:"Amiri",serif; font-size:clamp(18px,3vw,28px); margin:0}
-.poster h1{font-family:"Reem Kufi","Tajawal",sans-serif; font-weight:700; font-size:clamp(30px,4.6vw,58px); margin:0; line-height:1.3; white-space:nowrap}
-.poster p{margin:6px 0 0; color:#b9cdc3; font-size:clamp(14px,1.6vw,18px)}
-.srow{display:flex; align-items:center; justify-content:center; gap:14px}
-.srow .t{flex:1 1 0; min-width:90px; max-width:250px; font-weight:800; font-size:17px; line-height:1.5; display:-webkit-box; -webkit-line-clamp:6; -webkit-box-orient:vertical; overflow:hidden}
-.ctl{flex:1 1 0; min-width:48px; max-width:250px; display:flex; flex-direction:column; align-items:flex-start; gap:9px}
-.srow .t small{display:block; color:var(--muted); font-weight:500; font-size:13.5px; margin-top:4px}
-.nb{flex:none; height:40px; min-width:44px; padding:0 10px; border-radius:11px; border:1px solid var(--line); background:var(--chip); cursor:pointer; font-size:18px; font-weight:700; display:grid; place-items:center}
-.nb:hover{border-color:var(--gold)} .nb.on{color:var(--gold)} .nb[disabled]{opacity:.4; cursor:default}
+/* شرائح الأنواع */
+.chips{display:flex; gap:8px; overflow-x:auto; padding:10px 12px 8px; scrollbar-width:none; position:sticky; top:var(--bar); z-index:20; background:linear-gradient(var(--bg) 80%,transparent)}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none; border:0; cursor:pointer; border-radius:999px; padding:7px 14px; font-size:15px; font-weight:700; background:#fff; box-shadow:0 2px 8px rgba(91,61,160,.12); display:flex; align-items:center; gap:5px; transition:transform .15s}
+.chip:active{transform:scale(.92)}
+.chip.on{color:#fff; background:linear-gradient(135deg,var(--a),var(--b)); box-shadow:0 6px 16px color-mix(in srgb,var(--b) 45%,transparent); transform:translateY(-1px)}
 
-/* اللوحة تحت الشاشة */
-#panel{padding:2px 0 30px}
-.head{display:inline-flex; align-items:center; gap:9px; border-radius:999px; padding:5px 18px 5px 16px; color:#fff; background:linear-gradient(140deg,var(--a),var(--b)); max-width:100%}
-.head>div{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
-.head .ic{font-size:20px} .head h2{margin:0; font-size:17px; font-weight:800} .head p{margin:0; opacity:.93; font-size:13px}
-.chips{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:8px 0 4px}
-.chip{border:1px solid var(--line); background:var(--chip); border-radius:999px; padding:7px 15px; cursor:pointer; font-weight:700; font-size:14.5px; transition:.15s}
-.chip:hover{border-color:var(--a,var(--gold))}
-.chip.on{background:linear-gradient(140deg,var(--a,#d8a94a),var(--b,#b8892f)); color:#fff; border-color:transparent}
-.sub{font-size:15px; font-weight:800; margin:6px 2px 2px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-.sub small{color:var(--muted); font-weight:500; font-size:13.5px}
-.sub a{margin-inline-start:auto; font-size:13.5px; color:var(--gold); font-weight:700}
-.pick{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:12px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:10px 14px}
-.pick label{font-weight:700}
-.pick select{flex:1; min-width:170px; background:var(--chip); border:1px solid var(--line); border-radius:11px; padding:9px 12px; font-size:16px; outline:0}
-.pick select option{color:#12261f; background:#fff}
-.note{color:var(--muted); font-size:14px; margin:8px 4px 0}
-.note a{color:var(--gold); font-weight:700}
+/* رف القنوات (كالقصص) */
+.shelf{display:flex; gap:12px; overflow-x:auto; padding:6px 12px 12px; scrollbar-width:none}
+.shelf::-webkit-scrollbar{display:none}
+.ch{flex:none; width:76px; text-align:center; cursor:pointer; border:0; background:none; padding:0}
+.ring{width:70px; height:70px; margin:0 auto 4px; border-radius:50%; padding:3px; background:conic-gradient(from var(--ang),#f43f5e,#f59e0b,#22c55e,#06b6d4,#8b5cf6,#f43f5e); animation:spin 4s linear infinite}
+@property --ang{syntax:"<angle>"; inherits:false; initial-value:0deg}
+@keyframes spin{to{--ang:360deg}}
+.ring img{width:100%; height:100%; border-radius:50%; border:3px solid #fff; object-fit:cover; background:#f3e8ff; display:block}
+.ch span{font-size:12.5px; font-weight:700; line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
 
-.car{position:relative; margin-top:6px}
-.vids{display:flex; gap:10px; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x proximity; scrollbar-width:none; padding:3px 2px 6px; overscroll-behavior-x:contain}
-.vids::-webkit-scrollbar{display:none}
-.vids>.v,.vids>.more{flex:0 0 200px; scroll-snap-align:start}
-.arw{position:absolute; top:50%; transform:translateY(-50%); z-index:4; width:40px; height:40px; border-radius:50%; border:0; cursor:pointer; font-size:24px; font-weight:800; line-height:1; color:#2a1c02;
-  background:var(--shine); background-size:220% 100%; animation:shine 4s linear infinite; box-shadow:0 6px 18px rgba(0,0,0,.5), 0 0 0 2px rgba(255,243,196,.6) inset; display:grid; place-items:center; padding:0 0 3px}
-.arw:hover{filter:brightness(1.12)} .arw[data-arw="-1"]{inset-inline-start:-12px} .arw[data-arw="1"]{inset-inline-end:-12px}
-.crow{position:relative}
-.arw.sm{display:none; width:32px; height:32px; font-size:20px} .arw.sm[data-carw="-1"]{inset-inline-start:-4px} .arw.sm[data-carw="1"]{inset-inline-end:-4px}
-.more{display:grid; place-items:center; text-align:center; border:1px dashed var(--line); border-radius:13px; color:var(--muted); font-size:13.5px; font-weight:700; padding:8px; min-height:72px}
-.more a{color:var(--gold)} .more .sp{width:22px; height:22px; border-radius:50%; border:3px solid var(--line); border-top-color:var(--gold); animation:spin .8s linear infinite; margin:0 auto 4px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.v{position:relative; background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; cursor:pointer; text-align:start; padding:0; display:flex; flex-direction:column; transition:.18s}
-.v:hover{transform:translateY(-3px); border-color:var(--gold); box-shadow:var(--shadow)}
-.v.on{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold)}
-.v .th{position:relative; aspect-ratio:16/9; background:#0a0a0a}
-.v .th img{width:100%; height:100%; object-fit:cover; display:block}
-.v .th span{position:absolute; bottom:6px; left:6px; background:rgba(0,0,0,.82); color:#fff; font-size:12px; border-radius:6px; padding:1px 6px; direction:ltr}
-.v .th i{position:absolute; inset:0; display:grid; place-items:center; font-style:normal; font-size:34px; color:#fff; opacity:0; background:rgba(0,0,0,.35); transition:.18s}
-.v:hover .th i,.v.on .th i{opacity:1}
-.v .tx{padding:9px 11px 10px; padding-inline-end:40px}
-.v .tx b{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:14.5px; line-height:1.45}
-.v .tx small{color:var(--muted); font-size:12.5px; display:block; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.star{position:absolute; bottom:6px; inset-inline-end:5px; width:34px; height:34px; border-radius:10px; border:0; background:none; cursor:pointer; font-size:18px; color:var(--muted)}
-.star.on{color:var(--gold)} .star:hover{background:var(--chip)}
-.plcard{display:flex; align-items:center; gap:12px; width:100%; margin-top:12px; border:1px solid var(--gold); background:linear-gradient(140deg,rgba(231,195,106,.16),transparent); border-radius:16px; padding:12px 14px; cursor:pointer; text-align:start; font-size:16px; font-weight:700}
-.plcard i{font-style:normal; width:40px; height:40px; border-radius:50%; background:var(--shine); color:#1b1404; display:grid; place-items:center; flex:none}
-.plcard small{display:block; color:var(--muted); font-weight:500; font-size:13px}
-.empty{color:var(--muted); background:var(--card); border:1px dashed var(--line); border-radius:16px; padding:16px; text-align:center; margin-top:12px}
-.toast{position:fixed; bottom:28px; inset-inline:0; margin:auto; width:max-content; max-width:88vw; background:#1b1404; color:#fff3c4; border:1px solid var(--gold); border-radius:14px; padding:10px 16px; z-index:60; font-weight:700; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:.25s}
+.sec{display:flex; align-items:center; gap:8px; padding:6px 14px 2px; font-size:18px; font-weight:800}
+.sec small{color:var(--muted); font-weight:600; font-size:13px}
+
+/* شبكة المقاطع بأسلوب يوتيوب */
+.feed{display:grid; gap:18px; padding:8px 12px 18px; grid-template-columns:1fr}
+body.desk .feed{grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); padding:12px 22px 26px; gap:22px 18px}
+.vc{cursor:pointer; animation:pop .45s ease both}
+@keyframes pop{from{opacity:0; transform:translateY(14px) scale(.98)}}
+.th{position:relative; aspect-ratio:16/9; border-radius:18px; overflow:hidden; background:linear-gradient(135deg,#e9d5ff,#fbcfe8); box-shadow:var(--shadow)}
+.th img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s}
+.vc:hover .th img{transform:scale(1.06)}
+.th .d{position:absolute; bottom:8px; left:8px; background:rgba(20,10,40,.82); color:#fff; font-size:12.5px; border-radius:8px; padding:1px 7px; direction:ltr; font-family:system-ui,sans-serif}
+.th .pl{position:absolute; inset:0; display:grid; place-items:center; opacity:0; transition:.2s; background:rgba(40,10,70,.15)}
+.th .pl span{width:58px; height:58px; border-radius:50%; background:rgba(255,255,255,.95); display:grid; place-items:center; font-size:24px; color:var(--p2); box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.vc:hover .th .pl{opacity:1}
+.meta{display:flex; gap:10px; padding:10px 2px 0; align-items:flex-start}
+.meta img{width:38px; height:38px; border-radius:50%; flex:none; object-fit:cover; background:#f3e8ff; border:2px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.meta .mt{flex:1; min-width:0}
+.meta b{font-size:15.5px; font-weight:700; line-height:1.45; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.meta small{display:block; color:var(--muted); font-size:13px; margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.heart{flex:none; width:36px; height:36px; border:0; background:none; font-size:20px; cursor:pointer; filter:grayscale(1); opacity:.45; transition:.2s}
+.heart.on{filter:none; opacity:1; transform:scale(1.12)}
+.more{display:grid; place-items:center; padding:14px; color:var(--muted); font-weight:700}
+.loader{width:34px; height:34px; border-radius:50%; border:4px solid #e9d5ff; border-top-color:var(--p2); animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* صفحة المشاهدة */
+.watch .player{position:sticky; top:var(--bar); z-index:25; background:#000; aspect-ratio:16/9}
+body.desk .watch{display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:22px; padding:16px 22px; align-items:start}
+body.desk .watch .player{border-radius:20px; overflow:hidden; top:calc(var(--bar) + 12px); box-shadow:var(--shadow)}
+.player iframe{width:100%; height:100%; border:0; display:block}
+.wt{padding:12px 14px 6px}
+.wt h1{margin:0; font-size:19px; line-height:1.45; font-weight:800}
+.wt .row{display:flex; align-items:center; gap:10px; margin-top:10px}
+.wt .row img{width:46px; height:46px; border-radius:50%; object-fit:cover; cursor:pointer}
+.wt .row .who{flex:1; min-width:0; cursor:pointer} .wt .row b{display:block; font-size:16px; line-height:1.3} .wt .row small{color:var(--muted); font-size:13px}
+.pill{border:0; cursor:pointer; border-radius:999px; padding:8px 16px; font-weight:800; font-size:14.5px; color:#fff; background:linear-gradient(135deg,var(--p2),var(--p1)); box-shadow:0 6px 14px rgba(236,72,153,.35); flex:none}
+.pill.ghost{background:#fff; color:var(--text); box-shadow:0 2px 8px rgba(91,61,160,.15)}
+.next .feed{gap:12px}
+.next .vc{display:grid; grid-template-columns:44% minmax(0,1fr); gap:10px; align-items:start}
+.next .vc .th{border-radius:12px} .next .vc .meta{padding:0} .next .vc .meta img,.next .vc .heart{display:none} .next .vc .meta b{font-size:14px}
+body.desk .next .feed{grid-template-columns:1fr; padding:0}
+
+/* صفحة القناة */
+.banner{height:118px; background:linear-gradient(120deg,var(--a,#a78bfa),var(--b,#f472b6)); position:relative; overflow:hidden}
+.banner::before,.banner::after{content:""; position:absolute; border-radius:50%; background:rgba(255,255,255,.18)}
+.banner::before{width:160px; height:160px; top:-60px; right:-30px} .banner::after{width:110px; height:110px; bottom:-50px; left:20%}
+.chead{display:flex; align-items:flex-end; gap:12px; padding:0 14px 6px; margin-top:-40px; position:relative}
+.chead .ring{width:88px; height:88px; margin:0}
+.chead>div:last-child{padding-top:46px; min-width:0}
+.chead b{display:block; font-size:20px; font-weight:800; line-height:1.3}
+.chead small{color:var(--muted); font-size:13.5px}
+
+.cgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:14px 8px; padding:8px 12px 18px}
+.cgrid .ch{width:auto}
+
+/* الشريط السفلي مثل تطبيق يوتيوب */
+.nav{position:sticky; bottom:0; z-index:30; height:var(--nav); margin-top:auto; flex:none; display:flex; background:rgba(255,255,255,.96); backdrop-filter:blur(12px); border-top:1px solid var(--line); padding-bottom:env(safe-area-inset-bottom)}
+.nav button{flex:1; border:0; background:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; font-size:12.5px; font-weight:700; color:var(--muted)}
+.nav button i{font-style:normal; font-size:22px; transition:transform .2s}
+.nav button.on{color:var(--p1)} .nav button.on i{transform:translateY(-3px) scale(1.18)}
+body.desk .top{order:-2}
+body.desk .nav{position:sticky; top:var(--bar); bottom:auto; order:-1; height:48px; margin:0; border-top:0; border-bottom:1px solid var(--line); justify-content:center; gap:6px}
+body.desk .nav button{flex:none; flex-direction:row; gap:6px; padding:0 16px; font-size:15px}
+body.desk .nav button i{font-size:18px}
+
+.empty{text-align:center; color:var(--muted); padding:44px 20px; font-weight:700}
+.empty span{display:block; font-size:56px}
+.foot{text-align:center; color:var(--muted); font-size:13px; padding:6px 0 18px}
+.foot b{color:var(--p1)}
+.toast{position:fixed; bottom:84px; left:50%; transform:translateX(-50%); z-index:60; background:#2b1d4a; color:#fff; padding:9px 16px; border-radius:14px; font-weight:700; opacity:0; transition:.25s; pointer-events:none; max-width:90vw}
 .toast.show{opacity:1}
-
-/* ركن الأطفال */
-.khead{display:flex; align-items:center; justify-content:center; gap:14px; margin:8px 0 8px; padding:8px 16px; border-radius:18px; color:#3b2600; text-align:center;
-  background:linear-gradient(100deg,#fde68a,#fca5a5 30%,#f9a8d4 50%,#a5b4fc 72%,#86efac); box-shadow:0 8px 22px rgba(0,0,0,.3)}
-.khead span{font-size:28px; animation:bob 2.2s ease-in-out infinite} .khead span:last-child{animation-delay:.6s}
-.khead b{display:block; font-size:21px; font-weight:800} .khead small{font-size:13.5px; font-weight:700; opacity:.85}
-@keyframes bob{50%{transform:translateY(-5px) rotate(-6deg)}}
-.kgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(118px,1fr)); gap:9px; margin-bottom:6px}
-.ktile{position:relative; overflow:hidden; border:0; cursor:pointer; color:#fff; border-radius:18px; padding:9px 6px 8px; display:flex; flex-direction:column; align-items:center; gap:2px;
-  background:linear-gradient(145deg,var(--a),var(--b)); box-shadow:0 5px 0 color-mix(in srgb,var(--b) 70%,#000), 0 10px 18px rgba(0,0,0,.3); transition:transform .15s, box-shadow .15s}
-.ktile::after{content:""; position:absolute; top:-18px; left:-14px; width:58px; height:58px; border-radius:50%; background:rgba(255,255,255,.2)}
-.ktile span{font-size:30px; line-height:1.15; position:relative; z-index:1; transition:transform .2s}
-.ktile b{font-size:13.5px; font-weight:800; position:relative; z-index:1; line-height:1.3}
-.ktile:hover{transform:translateY(-3px)} .ktile:hover span{transform:scale(1.2) rotate(-8deg)}
-.ktile:active{transform:translateY(4px); box-shadow:0 1px 0 color-mix(in srgb,var(--b) 70%,#000)}
-.ktile.on{outline:3px solid #fff3c4; outline-offset:2px}
-
-/* شريط تثبيت التطبيق */
-.inst{position:fixed; inset-inline:10px; bottom:calc(10px + env(safe-area-inset-bottom)); z-index:70; display:flex; align-items:center; gap:11px; padding:11px 12px; border-radius:18px;
-  background:#0d231b; border:1.5px solid var(--gold); box-shadow:0 14px 40px rgba(0,0,0,.65); color:#f3f7f4; max-width:520px; margin:0 auto; animation:instUp .45s ease both}
-@keyframes instUp{from{transform:translateY(120%); opacity:0}to{transform:none; opacity:1}}
-.inst img{width:46px; height:46px; border-radius:12px; flex:none}
-.inst .tt{flex:1; min-width:0; font-weight:800; font-size:15.5px; line-height:1.45}
-.inst .tt small{display:block; font-weight:500; font-size:13px; color:#b9cdc3}
-.inst .go{flex:none; border:0; cursor:pointer; border-radius:12px; padding:9px 16px; font-weight:800; font-size:15px; color:#2a1c02; background:var(--shine); background-size:220% 100%; animation:shine 3s linear infinite}
-.inst .x{flex:none; border:0; background:none; color:#b9cdc3; font-size:20px; cursor:pointer; padding:4px 6px}
-
-/* أزرار اللغة */
-.lrow{display:contents}
-.lg{flex:none; width:38px; height:38px; border-radius:50%; padding:0; border:2px solid var(--line); background:var(--chip); cursor:pointer; overflow:hidden; display:grid; place-items:center; font-weight:800; font-size:17px; transition:.18s}
-.lg svg{width:100%; height:100%; display:block} .lg:hover{transform:translateY(-2px) scale(1.06); border-color:var(--gold)}
-.lg.on{border-color:var(--gold); box-shadow:0 0 0 2px var(--gold), 0 0 14px rgba(231,195,106,.6)}
-[dir="ltr"] .arw{transform:translateY(-50%) scaleX(-1)}
-[dir="ltr"] #prev,[dir="ltr"] #next{transform:scaleX(-1)}
-[dir="ltr"] .brand b{font-size:20px}
-
-/* عدّاد الزوار */
-.counter{position:relative; flex:none; display:flex; align-items:center; gap:7px; padding:5px 13px 5px 10px; border-radius:999px;
-  background:var(--shine); background-size:220% 100%; animation:shine 4s linear infinite; color:#2a1c02; font-weight:800;
-  box-shadow:0 0 0 1px #fff3c4 inset, 0 0 0 2px rgba(184,137,47,.45), 0 4px 16px rgba(216,169,74,.45)}
-.counter::before{content:""; position:absolute; inset:0; border-radius:inherit; background:linear-gradient(180deg,rgba(255,255,255,.55),transparent 45%); pointer-events:none}
-.counter .eye{font-size:16px; filter:drop-shadow(0 1px 0 rgba(255,255,255,.6))}
-.counter .num{font-size:17px; letter-spacing:.5px; direction:ltr; font-variant-numeric:tabular-nums; text-shadow:0 1px 0 rgba(255,255,255,.55)}
-.counter .lb{font-size:12.5px; font-weight:700; opacity:.85}
-.counter[hidden]{display:none}
-
-/* التذييل */
-footer{text-align:center; padding:26px 16px 40px; border-top:1px solid var(--line); margin-top:10px}
-footer .aya{font-family:"Amiri",serif; font-size:22px; display:block; margin-bottom:6px; color:var(--gold)}
-footer .dis{color:var(--muted); font-size:13.5px}
-.credit{margin:18px auto 0; display:inline-block; line-height:1.9; font-weight:800; font-size:17px; filter:drop-shadow(0 0 10px rgba(231,195,106,.35))}
-.ccard{display:flex; align-items:center; gap:20px; width:fit-content; max-width:100%; margin:24px auto 0; padding:16px 22px 16px 18px; border-radius:24px; text-align:start; border:1.5px solid transparent;
-  background:linear-gradient(160deg,color-mix(in srgb,var(--bg2) 88%,#fff),var(--bg)) padding-box, var(--shine) border-box; background-size:auto, 220% 100%; animation:shineB 5s linear infinite; box-shadow:0 16px 40px rgba(0,0,0,.4), 0 0 26px rgba(231,195,106,.12)}
-.ccard .qr{flex:none; line-height:0} .ccard .qr img{background:#fff; border-radius:16px; padding:7px; box-shadow:0 6px 18px rgba(0,0,0,.4); transition:.18s}
-.ccard .qr:hover img{transform:scale(1.05) rotate(-2deg)}
-.cinfo b{display:block; font-family:"Reem Kufi","Tajawal",sans-serif; font-size:27px; line-height:1.3}
-.cinfo small{display:block; color:var(--muted); font-size:14px; margin:2px 0 12px}
-.cbtns{display:flex; flex-wrap:wrap; gap:9px}
-.cbtns a{display:inline-flex; align-items:center; gap:7px; height:40px; padding:0 18px; border-radius:999px; font-weight:800; font-size:15px; transition:.18s}
-.cbtns a:hover{transform:translateY(-2px); filter:brightness(1.1)}
-.sitebtn{color:#2a1c02; background:var(--shine); background-size:220% 100%; animation:shine 3s linear infinite; box-shadow:0 6px 16px rgba(216,169,74,.4)}
-.cbtns .fb{background:#1877f2; color:#fff; box-shadow:0 6px 16px rgba(24,119,242,.4)}
-@media (max-width:520px){ [dir="ltr"] .brand b{font-size:15px} .ccard{flex-direction:column; text-align:center; padding:18px; gap:12px} .cbtns{justify-content:center} }
-.credit .nm{font-size:23px; display:block}
-.credit span{display:block}
-
-@media (min-width:981px){
-  .vids>.v,.vids>.more{flex-basis:285px}
-  .arw.sm{display:grid} .crow .chips{padding-inline:36px; scroll-behavior:smooth}
-  .chips:has(.head){flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding-bottom:2px} .chips:has(.head)::-webkit-scrollbar{display:none} .chips:has(.head)>*{flex:none}
-  .v{flex-direction:row; align-items:stretch; border-radius:13px}
-  .v .th{flex:none; width:128px}
-  .v .tx{flex:1; min-width:0; padding:6px 9px 6px; padding-inline-end:34px}
-  .v .tx b{font-size:13.5px; line-height:1.4}
-  .star{width:30px; height:30px; bottom:3px; inset-inline-end:3px; font-size:16px}
-}
-@media (max-width:860px){ :root{--bar:102px} .bar-in{flex-wrap:wrap; align-content:center; row-gap:5px} .lrow{display:flex; order:9; flex:0 0 100%; justify-content:center; align-items:center; gap:10px} .lg{width:30px; height:30px; font-size:14px} .fbox,.fgo{height:40px} }
-@media (max-width:980px){
-  .stage{display:flex; flex-direction:column; gap:10px; padding:0 10px}
-  .mid{display:contents}
-  .screenBox{order:1; margin:0 -10px; padding:8px 10px 8px; width:calc(100% + 20px); min-width:0; flex:none}
-  .srow{flex-wrap:wrap; gap:8px} .screen{border-radius:14px; flex:0 0 100%; order:1}
-  .srow .t{order:2; flex:1 1 0; max-width:none; min-width:0; font-size:15.5px; font-weight:700; display:block; white-space:nowrap; text-overflow:ellipsis} .srow .t small{margin-top:0; overflow:hidden; text-overflow:ellipsis}
-  .ctl{order:3; flex:none; min-width:0; flex-direction:row; gap:6px}
-  .side{order:2; position:static; max-height:none; width:100%; min-width:0; flex:none; flex-direction:row; overflow-x:auto; overflow-y:hidden; padding:4px 2px 6px; scroll-snap-type:x proximity}
-  .side{scrollbar-width:none} .side::-webkit-scrollbar{display:none}
-  #sideL{order:3}
-  .cat{scroll-snap-align:start; padding:9px 13px} .cat:hover{transform:none} .cat b{white-space:nowrap; font-size:14.5px} .cat .ic{font-size:21px}
-  #panel{order:4; width:100%; min-width:0}
-  .brand b{font-size:20px}
-  .vids{gap:9px} .vids>.v,.vids>.more{flex-basis:158px} .arw{width:34px; height:34px; font-size:21px} .arw[data-arw="-1"]{inset-inline-start:-6px} .arw[data-arw="1"]{inset-inline-end:-6px}
-  .counter{padding:4px 10px 4px 8px; gap:5px} .counter .num{font-size:15px} .counter .lb{display:none}
-}
-@media (max-width:520px){ .bar-in{gap:6px; padding:0 8px} .brand img{width:30px; height:30px} .brand b{font-size:17px} .ib{width:36px; height:36px; font-size:16px; border-radius:11px} .counter{padding:3px 8px} .counter .eye{font-size:13px} .counter .num{font-size:13.5px} .find{display:none} .find.open{display:flex; position:absolute; top:var(--bar); inset-inline:0; max-width:none; margin:0; padding:8px 10px; background:var(--bg); border-bottom:1px solid var(--line); z-index:31} #findBtn{display:grid!important} .bar-in{justify-content:space-between} }
-@media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important} }
 </style>
 </head>
-<body>
-<div class="bar"><div class="bar-in">
-  <button class="brand" id="home" aria-label="الرئيسية"><img src="icon.svg" alt=""><b class="gold">المسك المختوم</b></button>
-  <form class="find" id="find" role="search">
-    <label class="fbox"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
-      <input id="q" type="search" placeholder="ابحث عن قارئ، سورة، درس، خطبة…" autocomplete="off" aria-label="بحث"></label>
-    <button class="fgo" type="submit">بحث</button>
-  </form>
-  <div class="lrow">
-  <div class="counter" id="counter" hidden title="عدد زوار الموقع"><span class="eye">👁</span><span class="num" id="cnum">0</span><span class="lb">زائر</span></div>
-    <button class="lg" data-lang="ar" title="العربية" aria-label="العربية">ع</button>
-    <button class="lg" data-lang="en" title="English" aria-label="English"><svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice"><clipPath id="ukc"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ukc)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg></button>
-    <button class="lg" data-lang="de" title="Deutsch" aria-label="Deutsch"><svg viewBox="0 0 5 3" preserveAspectRatio="xMidYMid slice"><rect width="5" height="1" fill="#000"/><rect y="1" width="5" height="1" fill="#DD0000"/><rect y="2" width="5" height="1" fill="#FFCE00"/></svg></button>
-  </div>
-  <button class="ib" id="findBtn" style="display:none" aria-label="بحث">🔍</button>
-  <button class="ib" id="favBtn" title="المفضلة" aria-label="المفضلة">★</button>
-  <button class="ib" id="theme" title="تبديل المظهر" aria-label="تبديل المظهر">☀</button>
-</div></div>
-
-<div class="stage">
-  <aside class="side" id="sideR" aria-label="الأقسام"></aside>
-  <section class="mid">
-    <div class="screenBox">
-      <div class="srow">
-        <div class="t" id="nowT">شاشة العرض<small>لم يُختر مقطع بعد</small></div>
-        <div class="screen" id="screen">
-          <div class="poster"><p class="aya gold">﴿ خِتَامُهُ مِسْكٌ ﴾</p><h1 class="gold">المسك المختوم</h1><p>اختر قسماً من اليمين أو اليسار، ثم اختر مقطعاً ليُعرض هنا.</p></div>
-        </div>
-        <div class="ctl">
-          <button class="nb" id="prev" title="السابق" aria-label="السابق" disabled>⏭</button>
-          <button class="nb" id="next" title="التالي" aria-label="التالي" disabled>⏮</button>
-          <button class="nb" id="nowFav" title="إضافة إلى المفضلة" aria-label="المفضلة" disabled>★</button>
-          <a class="nb" id="nowYT" title="فتح في يوتيوب" aria-label="فتح في يوتيوب" target="_blank" rel="noopener" hidden>↗</a>
-        </div>
-      </div>
-    </div>
-    <div id="panel"></div>
-  </section>
-  <aside class="side" id="sideL" aria-label="الأقسام"></aside>
+<body class="phone">
+<div class="sky" id="sky"></div>
+<div class="app" id="app">
+  <header class="top">
+    <button class="logo" id="home" aria-label="الرئيسية">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset=".5" stop-color="#a855f7"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs><rect x="4" y="11" width="56" height="44" rx="17" fill="url(#lg)"/><path d="M27 23 L43 33 L27 43 Z" fill="#fff"/><circle cx="13" cy="9" r="4.5" fill="#fbbf24"/><circle cx="51" cy="8" r="3.2" fill="#34d399"/><circle cx="58" cy="17" r="2" fill="#f472b6"/></svg>
+      <b>LoLoTube</b>
+    </button>
+    <span class="sp"></span>
+    <button class="ib" id="searchBtn" aria-label="بحث" title="بحث">🔍</button>
+    <button class="ib" id="viewBtn" aria-label="طريقة العرض" title="عرض الحاسوب">🖥️</button>
+  </header>
+  <div class="search" id="search"><input id="q" type="search" placeholder="ابحث عن مقطع أو قناة…" autocomplete="off"><button class="pill" id="go">بحث</button></div>
+  <main id="main"></main>
+  <nav class="nav" id="nav">
+    <button data-nav="home"><i>🏠</i>الرئيسية</button>
+    <button data-nav="channels"><i>📺</i>القنوات</button>
+    <button data-nav="fav"><i>💖</i>المفضلة</button>
+    <button data-nav="history"><i>🕘</i>شاهدتُ</button>
+  </nav>
 </div>
-
-<footer>
-  <span class="aya">﴿ وَفِي ذَٰلِكَ فَلْيَتَنَافَسِ الْمُتَنَافِسُونَ ﴾</span>
-  <div class="dis">جميع المقاطع تُعرض من يوتيوب مباشرة، والتطبيق لا يستضيف أي محتوى.</div>
-  <div class="credit gold">
-    <span class="nm">لوجيكال كود | Logical Code</span>
-    <span>للبرمجة والاعلام الرقمي</span>
-    <span>العراق - موصل</span>
-    <span dir="ltr">07764994170</span>
-  </div>
-  <div class="ccard">
-    <a class="qr" href="https://alialsaffarmosuluniversity.github.io/logicalcode/" target="_blank" rel="noopener" aria-label="موقع لوجيكال كود">
-      <img src="qr-logicalcode.svg" alt="رمز الانتقال إلى موقع لوجيكال كود" width="120" height="120" loading="lazy">
-    </a>
-    <div class="cinfo">
-      <b class="gold">زوروا موقعنا</b>
-      <small>امسح الرمز بكاميرا هاتفك، أو اضغط أحد الزرين</small>
-      <div class="cbtns">
-        <a class="sitebtn" href="https://alialsaffarmosuluniversity.github.io/logicalcode/" target="_blank" rel="noopener">موقع لوجيكال كود ↗</a>
-        <a class="fb" href="https://www.facebook.com/logicalcode4all" target="_blank" rel="noopener" aria-label="صفحة لوجيكال كود على فيسبوك">
-          <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path fill="currentColor" d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.500-4.2 4.300v2.400H7.300v3.200h2.800V22z"/></svg>
-          <span>فيسبوك</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</footer>
-
 <div class="toast" id="toast"></div>
 
 <script>
-/* ================== البيانات ================== */
-const SURAHS = "الفاتحة،البقرة،آل عمران،النساء،المائدة،الأنعام،الأعراف،الأنفال،التوبة،يونس،هود،يوسف،الرعد،إبراهيم،الحجر،النحل،الإسراء،الكهف،مريم،طه،الأنبياء،الحج،المؤمنون،النور،الفرقان،الشعراء،النمل،القصص،العنكبوت،الروم،لقمان،السجدة،الأحزاب،سبأ،فاطر،يس،الصافات،ص،الزمر،غافر،فصلت،الشورى،الزخرف،الدخان،الجاثية،الأحقاف،محمد،الفتح،الحجرات،ق،الذاريات،الطور،النجم،القمر،الرحمن،الواقعة،الحديد،المجادلة،الحشر،الممتحنة،الصف،الجمعة،المنافقون،التغابن،الطلاق،التحريم،الملك،القلم،الحاقة،المعارج،نوح،الجن،المزمل،المدثر،القيامة،الإنسان،المرسلات،النبأ،النازعات،عبس،التكوير،الانفطار،المطففين،الانشقاق،البروج،الطارق،الأعلى،الغاشية،الفجر،البلد،الشمس،الليل،الضحى،الشرح،التين،العلق،القدر،البينة،الزلزلة،العاديات،القارعة،التكاثر،العصر،الهمزة،الفيل،قريش،الماعون،الكوثر،الكافرون،النصر،المسد،الإخلاص،الفلق،الناس".split("،");
-
-const RECITERS = ["عبد الباسط عبد الصمد","محمد صديق المنشاوي","محمود خليل الحصري","مصطفى إسماعيل","محمود علي البنا","محمد رفعت",
-"مشاري راشد العفاسي","ماهر المعيقلي","عبد الرحمن السديس","سعود الشريم","ياسر الدوسري","بندر بليلة","عبد الله الجهني",
-"علي الحذيفي","صلاح البدير","علي جابر","محمد أيوب","سعد الغامدي","أحمد العجمي","ناصر القطامي","فارس عباد",
-"أبو بكر الشاطري","عبد الله بصفر","هاني الرفاعي","إدريس أبكر","خالد الجليل","محمد اللحيدان","هزاع البلوشي",
-"عبد الرحمن مسعد","إسلام صبحي","وديع اليمني","محمد الطبلاوي","عبد الله المطرود","عبد الودود حنيف","أحمد نعينع","رعد محمد الكردي"];
-
-const I = (t,q)=>({t,q:q||t});
-const K = (t,q,ic,a,b)=>({t,q,ic,a,b});
-const CATS = [
- {id:"quran", t:"القرآن الكريم", d:"جميع القرّاء والسور", ic:"📖", a:"#10b981", b:"#047857", quran:true,
-  items:[I("القرآن الكريم كاملاً","القرآن الكريم كاملا"),I("تلاوات خاشعة","تلاوات خاشعة مؤثرة"),I("قرآن قبل النوم","قرآن كريم هادئ للنوم"),
-         I("سورة البقرة كاملة"),I("سورة الكهف كاملة"),I("جزء عمّ كاملاً","جزء عم كاملا"),I("ختمة الحرم المكي","ختمة المسجد الحرام كاملة"),
-         I("ختمة الحرم النبوي","ختمة المسجد النبوي كاملة"),I("القرآن مع الترجمة","القرآن الكريم مترجم")]},
- {id:"tajweed", t:"التجويد والحفظ", d:"تعلّم التلاوة الصحيحة", ic:"🎓", a:"#14b8a6", b:"#0f766e",
-  items:[I("أحكام التجويد للمبتدئين"),I("مخارج الحروف","شرح مخارج الحروف وصفاتها"),I("القاعدة النورانية","القاعدة النورانية كاملة"),
-         I("المصحف المعلّم","المصحف المعلم للكبار"),I("تحفيظ القرآن","طريقة حفظ القرآن الكريم"),I("تصحيح التلاوة","تصحيح تلاوة القرآن"),
-         I("القراءات العشر","شرح القراءات العشر"),I("شرح تحفة الأطفال"),I("شرح المقدمة الجزرية")]},
- {id:"tafsir", t:"التفسير", d:"تدبّر وعلوم القرآن", ic:"💡", a:"#3b82f6", b:"#1d4ed8",
-  items:[I("تفسير القرآن كاملاً","تفسير القرآن الكريم كاملا"),I("التفسير الميسّر","التفسير الميسر"),I("تفسير ابن كثير"),I("تفسير السعدي"),
-         I("تفسير جزء عمّ","تفسير جزء عم"),I("تدبّر القرآن","تدبر القرآن الكريم"),I("أسباب النزول"),I("قصص القرآن"),I("علوم القرآن","دروس علوم القرآن")]},
- {id:"hadith", t:"الحديث والسنة", d:"شروح كتب الحديث", ic:"📜", a:"#f59e0b", b:"#b45309",
-  items:[I("شرح الأربعين النووية"),I("شرح رياض الصالحين"),I("شرح صحيح البخاري"),I("شرح صحيح مسلم"),I("شرح بلوغ المرام"),
-         I("شرح عمدة الأحكام"),I("الأحاديث القدسية"),I("مصطلح الحديث","شرح مصطلح الحديث"),I("أحاديث نبوية قصيرة","أحاديث نبوية صحيحة قصيرة")]},
- {id:"khutab", t:"الخطب", d:"الجمعة والأعياد والحرمين", ic:"🕌", a:"#8b5cf6", b:"#6d28d9",
-  items:[I("خطب الجمعة","خطبة الجمعة"),I("خطبة المسجد الحرام","خطبة الجمعة من المسجد الحرام"),I("خطبة المسجد النبوي","خطبة الجمعة من المسجد النبوي"),
-         I("خطبة المسجد الأقصى","خطبة الجمعة من المسجد الأقصى"),I("خطبة عيد الفطر"),I("خطبة عيد الأضحى"),I("خطبة يوم عرفة"),
-         I("خطب مؤثرة","خطبة جمعة مؤثرة"),I("خطب قصيرة","خطبة جمعة قصيرة")]},
- {id:"dawah", t:"الدعوة إلى الله", d:"التعريف بالإسلام", ic:"🌍", a:"#f97316", b:"#c2410c",
-  items:[I("التعريف بالإسلام","ما هو الإسلام"),I("قصص المهتدين","قصص إسلام المهتدين الجدد"),I("حوارات دعوية","حوار دعوي مع غير المسلمين"),
-         I("الرد على الشبهات","الرد على الشبهات حول الإسلام"),I("فقه الدعوة","فقه الدعوة إلى الله وأساليبها"),I("محاسن الإسلام"),
-         I("دلائل النبوة"),I("الإعجاز العلمي","الإعجاز العلمي في القرآن والسنة")]},
- {id:"seerah", t:"السيرة النبوية", d:"حياة النبي ﷺ وصحابته", ic:"🌙", a:"#f43f5e", b:"#be123c",
-  items:[I("السيرة النبوية كاملة"),I("الشمائل المحمدية","شرح الشمائل المحمدية"),I("غزوات النبي ﷺ","غزوات النبي صلى الله عليه وسلم"),
-         I("الهجرة النبوية"),I("حياة الصحابة","سير الصحابة"),I("الخلفاء الراشدون","سيرة الخلفاء الراشدين"),I("أمهات المؤمنين","سيرة أمهات المؤمنين"),
-         I("الصحابيات","قصص الصحابيات")]},
- {id:"stories", t:"قصص الأنبياء والتاريخ", d:"عِبر من السابقين", ic:"🏛️", a:"#6366f1", b:"#4338ca",
-  items:[I("قصص الأنبياء كاملة","قصص الأنبياء كاملة"),I("قصة آدم عليه السلام"),I("قصة نوح عليه السلام"),I("قصة إبراهيم عليه السلام"),
-         I("قصة يوسف عليه السلام"),I("قصة موسى عليه السلام"),I("قصة عيسى عليه السلام"),I("التاريخ الإسلامي"),I("الحضارة الإسلامية"),I("تاريخ الأندلس")]},
- {id:"fiqh", t:"الفقه والفتاوى", d:"أحكام العبادات والمعاملات", ic:"⚖️", a:"#06b6d4", b:"#0e7490",
-  items:[I("أحكام الطهارة","شرح أحكام الطهارة"),I("صفة الصلاة","صفة صلاة النبي"),I("أحكام الصيام"),I("أحكام الزكاة"),I("الحج والعمرة","شرح مناسك الحج والعمرة"),
-         I("فقه المعاملات","فقه المعاملات المالية"),I("فتاوى على الهواء","فتاوى على الهواء"),I("فقه الأسرة","فقه الأسرة والنكاح"),I("أصول الفقه","شرح أصول الفقه")]},
- {id:"aqeedah", t:"العقيدة والإيمان", d:"أركان الإيمان والتوحيد", ic:"✨", a:"#0ea5e9", b:"#0369a1",
-  items:[I("أركان الإسلام","شرح أركان الإسلام"),I("أركان الإيمان","شرح أركان الإيمان"),I("أسماء الله الحسنى","شرح أسماء الله الحسنى"),
-         I("التوحيد","دروس التوحيد"),I("اليوم الآخر","الإيمان باليوم الآخر"),I("علامات الساعة"),I("الجنة والنار","وصف الجنة والنار"),I("القضاء والقدر","الإيمان بالقضاء والقدر")]},
- {id:"adhkar", t:"الأذكار والأدعية", d:"حصن المسلم اليومي", ic:"🤲", a:"#22c55e", b:"#15803d",
-  items:[I("أذكار الصباح"),I("أذكار المساء"),I("أذكار النوم"),I("أذكار بعد الصلاة"),I("الرقية الشرعية","الرقية الشرعية كاملة"),
-         I("دعاء ختم القرآن"),I("دعاء القنوت","دعاء القنوت من الحرم"),I("الاستغفار","استغفار وتسبيح"),I("أدعية من القرآن والسنة","أدعية من القرآن والسنة")]},
- {id:"mawaiz", t:"المواعظ والرقائق", d:"ما يليّن القلوب", ic:"💧", a:"#a855f7", b:"#7e22ce",
-  items:[I("مواعظ مؤثرة","موعظة مؤثرة"),I("التوبة","التوبة والرجوع إلى الله"),I("الموت والآخرة","موعظة عن الموت والآخرة"),I("الصبر","الصبر على البلاء"),
-         I("حسن الخلق"),I("محاسبة النفس"),I("حسن الظن بالله"),I("مقاطع قصيرة","مقاطع إسلامية قصيرة مؤثرة")]},
- {id:"lessons", t:"الدروس والمحاضرات", d:"سلاسل ودورات علمية", ic:"🎙️", a:"#64748b", b:"#334155",
-  items:[I("محاضرات إسلامية","محاضرة إسلامية كاملة"),I("دروس المسجد الحرام","دروس المسجد الحرام"),I("دروس المسجد النبوي","دروس المسجد النبوي"),
-         I("دورات علمية","دورة علمية شرعية"),I("شرح المتون","شرح المتون العلمية"),I("طلب العلم","منهجية طلب العلم الشرعي"),I("سلاسل علمية","سلسلة علمية شرعية كاملة")]},
- {id:"live", t:"البث المباشر", d:"الحرمين وإذاعات القرآن", ic:"🔴", a:"#ef4444", b:"#b91c1c", mode:"live",
-  items:[I("قناة القرآن — مكة","قناة القرآن الكريم مكة المكرمة بث مباشر"),I("قناة السنة — المدينة","قناة السنة النبوية المدينة المنورة بث مباشر"),
-         I("إذاعة القرآن الكريم","إذاعة القرآن الكريم بث مباشر"),I("تلاوات مباشرة","قرآن كريم بث مباشر"),I("صلاة التراويح","صلاة التراويح بث مباشر"),
-         I("خطبة الجمعة","خطبة الجمعة بث مباشر")]},
- {id:"adhan", t:"الأذان والصلوات", d:"من الحرمين والعالم", ic:"📣", a:"#d97706", b:"#92400e",
-  items:[I("أذان المسجد الحرام","أذان المسجد الحرام"),I("أذان المسجد النبوي","أذان المسجد النبوي"),I("أذان الفجر","أذان الفجر"),
-         I("أجمل أذان","أجمل أذان في العالم"),I("صلاة الفجر من الحرم","صلاة الفجر من المسجد الحرام"),I("صلاة التهجد","صلاة التهجد من الحرم المكي")]},
- {id:"anasheed", t:"الأناشيد", d:"أناشيد وابتهالات", ic:"🎵", a:"#ec4899", b:"#be185d",
-  items:[I("طال ليلي — يوسف الأيوب","طال ليلي يوسف الأيوب"),I("أناشيد بدون موسيقى","أناشيد إسلامية بدون موسيقى"),I("أناشيد هادئة","أناشيد إسلامية هادئة"),I("مدائح نبوية","مدائح نبوية"),
-         I("ابتهالات","ابتهالات دينية"),I("أناشيد رمضان"),I("أناشيد العيد"),I("أناشيد الأعراس","أناشيد أعراس إسلامية")]},
- {id:"kids", t:"ركن الأطفال", d:"عالم ممتع ونافع للطفل المسلم", ic:"🧒", a:"#eab308", b:"#a16207", kids:true,
-  items:[K("كرتون إسلامي","كرتون إسلامي للأطفال","🎬","#f43f5e","#be123c"),K("قصص الأنبياء","قصص الأنبياء للأطفال","📖","#6366f1","#4338ca"),
-         K("سيرة النبي","السيرة النبوية للأطفال","🌙","#0ea5e9","#0369a1"),K("قصص الصحابة","قصص الصحابة للأطفال","🛡️","#8b5cf6","#6d28d9"),
-         K("حيوانات القرآن","قصص الحيوان في القرآن للأطفال","🐘","#22c55e","#15803d"),K("حكايات قبل النوم","حكايات قبل النوم للأطفال إسلامية","🌜","#475569","#1e293b"),
-         K("أناشيد الأطفال","أناشيد إسلامية للأطفال","🎵","#ec4899","#be185d"),K("تعليم القرآن","تعليم القرآن للأطفال","📗","#10b981","#047857"),
-         K("جزء عمّ","جزء عم للأطفال مكرر","⭐","#f59e0b","#b45309"),K("الحروف العربية","تعليم الحروف العربية للأطفال","🔤","#06b6d4","#0e7490"),
-         K("الوضوء والصلاة","تعليم الوضوء والصلاة للأطفال","💧","#3b82f6","#1d4ed8"),K("أركان الإسلام","أركان الإسلام للأطفال","🕋","#84cc16","#4d7c0f"),
-         K("أسماء الله الحسنى","أسماء الله الحسنى للأطفال","✨","#d946ef","#a21caf"),K("أذكار الطفل","أذكار الصباح والمساء للأطفال","🤲","#14b8a6","#0f766e"),
-         K("الأخلاق الحسنة","تعليم الأخلاق للأطفال كرتون","💎","#f97316","#c2410c"),K("آداب المسلم الصغير","آداب إسلامية للأطفال","🌷","#e11d48","#9f1239"),
-         K("بر الوالدين","بر الوالدين للأطفال كرتون","❤️","#ef4444","#b91c1c"),K("بناء الشخصية","الثقة بالنفس للأطفال كرتون","🦁","#d97706","#92400e"),
-         K("مسابقات وألغاز","مسابقات وألغاز إسلامية للأطفال","🧩","#7c3aed","#5b21b6"),K("رمضان والعيد","قصة رمضان للأطفال","🏮","#ca8a04","#854d0e"),
-         K("أشغال ورسم","أشغال يدوية إسلامية للأطفال","🎨","#db2777","#9d174d"),K("English","Islamic cartoons for kids in English","🌍","#2dd4bf","#0d9488")]},
- {id:"family", t:"الأسرة والشباب", d:"تربية وحياة زوجية", ic:"🏡", a:"#d946ef", b:"#a21caf",
-  items:[I("تربية الأبناء","تربية الأبناء في الإسلام"),I("الحياة الزوجية","السعادة الزوجية في الإسلام"),I("فقه المرأة","فقه المرأة المسلمة"),
-         I("بر الوالدين"),I("اختيار شريك الحياة","اختيار الزوج والزوجة في الإسلام"),I("همّة الشباب","محاضرات للشباب المسلم"),I("صلة الرحم")]},
- {id:"seasons", t:"رمضان والحج", d:"مواسم الطاعات", ic:"🕋", a:"#84cc16", b:"#4d7c0f",
-  items:[I("صلاة التراويح","صلاة التراويح من الحرم المكي"),I("ليلة القدر"),I("برامج رمضان","برامج رمضان الدينية"),I("مناسك الحج","شرح مناسك الحج خطوة بخطوة"),
-         I("مناسك العمرة","شرح مناسك العمرة خطوة بخطوة"),I("يوم عرفة","فضل يوم عرفة"),I("عشر ذي الحجة","فضل عشر ذي الحجة"),I("أحكام العيدين")]},
- {id:"langs", t:"الإسلام بلغات العالم", d:"English · Français · Türkçe", ic:"🌐", a:"#2dd4bf", b:"#0d9488",
-  items:[I("English","Islamic lectures in English"),I("Quran + English","Quran recitation with English translation"),I("Français","conférence islam en français"),
-         I("Türkçe","İslami sohbetler"),I("اردو","اسلامی بیانات اردو"),I("Indonesia","ceramah Islam"),I("Español","Islam en español"),
-         I("Deutsch","Islam Vortrag deutsch"),I("Русский","лекции об исламе")]}
-];
-
-
-
-/* ================== اللغة والترجمة ================== */
-const LANG = window.MISK_LANG || "ar", RTL = LANG === "ar", DIRF = RTL ? -1 : 1;
-const tr = (function(){
-  if (RTL) return s => s;
-  const D = (window.MISK_I18N || {})[LANG] || {}, SUR = (window.MISK_I18N || {}).sur || [];
-  const W = LANG === "de" ? {surah:"Sure", by:"rezitiert von", rec:"Rezitatoren", recOf:"Rezitationen von", onYT:"auf YouTube"} : {surah:"Surah", by:"recited by", rec:"reciters", recOf:"Recitations of", onYT:"on YouTube"};
-  const AR = /[\u0600-\u06FF]/;
-  const surah = n => { const i = SURAHS.indexOf(n); return i >= 0 ? SUR[i] : n; };
-  function one(c){
-    if (D[c] != null) return D[c];
-    let m;
-    if (c.endsWith(" ↗")) return one(c.slice(0, -2)) + " ↗";
-    if (c.includes(" — ")) return c.split(" — ").map(one).join(" — ");
-    if ((m = c.match(/^(\d+)\. سورة (.+)$/))) return m[1] + ". " + W.surah + " " + surah(m[2]);
-    if ((m = c.match(/^سورة (.+?) بصوت (.+?) في يوتيوب$/))) return W.surah + " " + surah(m[1]) + ", " + W.by + " " + one(m[2]) + " " + W.onYT;
-    if ((m = c.match(/^سورة (.+)$/))) return W.surah + " " + surah(m[1]);
-    if ((m = c.match(/^(\d+) قارئاً$/))) return m[1] + " " + W.rec;
-    if ((m = c.match(/^تلاوات (.+)$/))) return W.recOf + " " + one(m[1]);
-    return c;
-  }
-  return s => { if (!s || !AR.test(s)) return s; const c = s.trim(); if (!c) return s; const t = one(c); return t === c ? s : s.replace(c, t); };
-})();
-if (!RTL){
-  const ATTRS = ["placeholder", "title", "aria-label", "alt"];
-  const walk = n => {
-    if (n.nodeType === 3){ const t = tr(n.nodeValue); if (t !== n.nodeValue) n.nodeValue = t; return; }
-    if (n.nodeType !== 1 || n.tagName === "SCRIPT" || n.tagName === "STYLE") return;
-    ATTRS.forEach(a => { const v = n.getAttribute(a); if (v){ const t = tr(v); if (t !== v) n.setAttribute(a, t); } });
-    for (const c of n.childNodes) walk(c);
-  };
-  walk(document.body); document.title = tr(document.title);
-  new MutationObserver(ms => ms.forEach(m => { if (m.type === "characterData") walk(m.target); else if (m.type === "attributes") { const v = m.target.getAttribute(m.attributeName); if (v){ const t = tr(v); if (t !== v) m.target.setAttribute(m.attributeName, t); } } else m.addedNodes.forEach(walk); }))
-    .observe(document.body, {childList:true, subtree:true, characterData:true, attributes:true, attributeFilter:ATTRS});
-  new MutationObserver(() => { const t = tr(document.title); if (t !== document.title) document.title = t; }).observe(document.querySelector("title"), {childList:true});
-}
-
-/* ================== الحالة والتخزين ================== */
-const store = {
-  get(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
-  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
-};
+/* ============ أدوات ============ */
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const ytSearch = q => "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
-let DATA = {items:{}, rec:{}};
-let favs = store.get("misk-favs2", []);          // [[id,title,channel,dur], ...]
-let view = {cat:null, item:null, rec:null, list:[], label:""};
-let cur = {type:null, list:[], idx:0, pl:null, title:""};   // ما يُعرض في الشاشة الآن
-const isFav = id => favs.some(f => f[0] === id);
-let toastT; function toast(m){ const t = $("toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 3200); }
+const store = { get(k, d){ try { const v = localStorage.getItem("lolo-" + k); return v ? JSON.parse(v) : d; } catch(e){ return d; } },
+                set(k, v){ try { localStorage.setItem("lolo-" + k, JSON.stringify(v)); } catch(e){} } };
+let tT; const toast = m => { const t = $("toast"); t.textContent = m; t.classList.add("show"); clearTimeout(tT); tT = setTimeout(() => t.classList.remove("show"), 2600); };
+const thumb = id => "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
 
-/* ================== الأقسام على الجانبين ================== */
-function sides(){
-  const half = Math.ceil(CATS.length / 2);
-  const btn = c => `<button class="cat ${view.cat === c.id ? "on" : ""}" data-cat="${c.id}" style="--a:${c.a};--b:${c.b}" title="${esc(c.d)}"><span class="ic" aria-hidden="true">${c.ic}</span><b>${esc(c.t)}</b></button>`;
-  $("sideR").innerHTML = CATS.slice(0, half).map(btn).join("");
-  $("sideL").innerHTML = CATS.slice(half).map(btn).join("");
-}
+/* ============ البيانات ============ */
+let D = {cats:[], channels:[]}, CH = {}, VID = {};
+let favs = store.get("favs", []), hist = store.get("hist", []);
+let state = {cat:"all"};
 
-/* ================== اللوحة ================== */
-/* ترجمة عناوين المقاطع إلى لغة الواجهة (ترجمة آلية، تُحفظ على الجهاز) */
-const TT = RTL ? null : store.get("misk-tt-" + LANG, {});
-let ttQ = [], ttTimer = null, ttBusy = false;
-function tt(v){
-  if (RTL || !v) return v ? v[1] : "";
-  if (TT[v[0]]) return TT[v[0]];
-  if (!/[\u0600-\u06FF]/.test(v[1])) return v[1];
-  if (!ttQ.some(x => x[0] === v[0])) ttQ.push(v);
-  clearTimeout(ttTimer); ttTimer = setTimeout(ttRun, 200);
-  return v[1];
+/* ============ الخلفية السحرية ============ */
+(function(){
+  const s = $("sky"), cols = ["#f9a8d4","#c4b5fd","#93c5fd","#86efac","#fde68a"];
+  for (let i = 0; i < 16; i++){ const b = document.createElement("i"), z = 14 + Math.random() * 46;
+    b.style.cssText = `left:${Math.random()*100}%;width:${z}px;height:${z}px;--c:${cols[i%5]};--dx:${(Math.random()-.5)*160}px;animation-duration:${14+Math.random()*16}s;animation-delay:${-Math.random()*20}s`; s.appendChild(b); }
+  for (let i = 0; i < 14; i++){ const t = document.createElement("b"); t.textContent = i % 3 ? "✦" : "★";
+    t.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${8+Math.random()*14}px;animation-delay:${-Math.random()*3}s`; s.appendChild(t); }
+})();
+
+/* ============ طريقة العرض: الهاتف هو الافتراضي ============ */
+function setView(v, save){
+  document.body.classList.toggle("phone", v !== "desk"); document.body.classList.toggle("desk", v === "desk");
+  $("viewBtn").textContent = v === "desk" ? "📱" : "🖥️"; $("viewBtn").title = v === "desk" ? "عرض الهاتف" : "عرض الحاسوب";
+  if (save){ store.set("view", v); toast(v === "desk" ? "🖥️ عرض الحاسوب" : "📱 عرض الهاتف"); }
 }
-async function ttRun(){
-  if (ttBusy || !ttQ.length) return; ttBusy = true;
-  const batch = ttQ.splice(0, 10);
-  try {
-    let res = null;
-    try {
-      const j = await getJSON("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=" + LANG + "&dt=t&q=" + encodeURIComponent(batch.map(v => v[1].replace(/\s+/g, " ")).join("\n")));
-      const lines = j[0].map(x => x[0]).join("").split("\n"); if (lines.length === batch.length) res = lines;
-    } catch(e){}
-    if (!res){ res = []; for (const v of batch){ try { const j = await getJSON("https://api.mymemory.translated.net/get?langpair=ar|" + LANG + "&q=" + encodeURIComponent(v[1])); res.push((j.responseData || {}).translatedText || ""); } catch(e){ res.push(""); } } }
-    batch.forEach((v, i) => { const t = (res[i] || "").trim(); if (!t) return; TT[v[0]] = t;
-      document.querySelectorAll('.v[data-id="' + v[0] + '"] .tx b').forEach(el => { el.textContent = t; }); });
-    const ks = Object.keys(TT); if (ks.length > 2500) ks.slice(0, 600).forEach(k => delete TT[k]);
-    store.set("misk-tt-" + LANG, TT); nowBar();
-  } finally { ttBusy = false; if (ttQ.length) setTimeout(ttRun, 250); }
+setView(store.get("view", "phone"));
+$("viewBtn").onclick = () => setView(document.body.classList.contains("desk") ? "phone" : "desk", true);
+
+/* ============ البطاقات ============ */
+const catOf = id => D.cats.find(c => c.id === id) || {};
+function card(v){
+  const c = CH[v.c] || {};
+  return `<div class="vc" data-v="${v.id}">
+    <div class="th"><img loading="lazy" src="${thumb(v.id)}" alt="">${v.d ? `<span class="d">${esc(v.d)}</span>` : ""}<div class="pl"><span>▶</span></div></div>
+    <div class="meta"><img loading="lazy" src="${esc(c.av || "")}" alt="" data-ch="${esc(v.c)}"><div class="mt"><b>${esc(v.t)}</b><small>${esc(c.n || "")}${v.a ? " · " + esc(v.a) : ""}</small></div>
+    <button class="heart ${favs.includes(v.id) ? "on" : ""}" data-heart="${v.id}" aria-label="أضف إلى المفضلة">💖</button></div></div>`;
 }
-function cardHTML(v, i){
-  return `<div class="v ${cur.type === "vids" && cur.list[cur.idx] && cur.list[cur.idx][0] === v[0] ? "on" : ""}" data-play="${i}" data-id="${v[0]}" role="button" tabindex="0">
-      <div class="th"><img loading="lazy" src="https://i.ytimg.com/vi/${v[0]}/mqdefault.jpg" alt="">${v[3] ? `<span>${esc(v[3])}</span>` : ""}<i>▶</i></div>
-      <div class="tx"><b title="${esc(v[1])}">${esc(tt(v))}</b><small>${esc(v[2])}</small></div>
-      <button class="star ${isFav(v[0]) ? "on" : ""}" data-fav="${i}" aria-label="المفضلة" title="المفضلة">★</button>
-    </div>`;
-}
-function vidsHTML(list){
-  if (!list.length && !liveQ()) return `<div class="empty">لا توجد مقاطع هنا حالياً.</div>`;
-  return `<div class="car"><button class="arw" data-arw="-1" aria-label="السابق" title="السابق">›</button>
-    <div class="vids" id="vids">${list.map(cardHTML).join("")}</div>
-    <button class="arw" data-arw="1" aria-label="المزيد" title="المزيد من يوتيوب">‹</button></div>`;
+const chBtn = c => `<button class="ch" data-ch="${esc(c.id)}"><div class="ring"><img loading="lazy" src="${esc(c.av)}" alt=""></div><span>${esc(c.n)}</span></button>`;
+
+/* خلط المقاطع بالتناوب بين القنوات حتى لا تطغى قناة واحدة */
+function mix(chs){
+  const lists = chs.map(c => (c.v || []).map(x => VID[x[0]]).filter(Boolean)), out = [];
+  for (let i = 0; lists.some(l => i < l.length); i++) lists.forEach(l => { if (l[i]) out.push(l[i]); });
+  return out;
 }
 
-/* ================== جلب المزيد من يوتيوب مباشرة ================== */
-const YT_API_KEY = "";   // اختياري: مفتاح YouTube Data API. إن تُرك فارغاً تُستعمل المصادر المفتوحة أدناه.
+/* عرض لا نهائي: يضيف المقاطع كلما اقترب الطفل من الأسفل */
+let feedList = [], feedN = 0, feedMore = null;
+function feed(list, moreFn){ feedList = list; feedN = 0; feedMore = moreFn || null; $("feed").innerHTML = ""; addFeed(); io.observe($("feedEnd")); }
+function addFeed(){
+  const el = $("feed"); if (!el) return;
+  const chunk = feedList.slice(feedN, feedN + 16); feedN += chunk.length;
+  el.insertAdjacentHTML("beforeend", chunk.map(card).join(""));
+  const m = $("feedEnd"); if (m) m.innerHTML = (feedN < feedList.length || feedMore) ? '<div class="loader"></div>' : "✨ وصلتَ إلى النهاية ✨";
+}
+const io = new IntersectionObserver(es => es.forEach(async e => {
+  if (!e.isIntersecting) return;
+  if (feedN < feedList.length) return addFeed();
+  if (feedMore){ const f = feedMore; feedMore = null; const more = await f(); const m = $("feedEnd");
+    if (more && more.length){ feedList = feedList.concat(more); feedMore = f; addFeed(); } else if (m) m.innerHTML = "✨ وصلتَ إلى النهاية ✨"; }
+}), {rootMargin:"700px"});
+
+/* ============ الصفحات ============ */
+const navOn = n => document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("on", b.dataset.nav === n));
+const chipsHTML = () => `<div class="chips" id="chips">${D.cats.map(c => `<button class="chip ${state.cat === c.id ? "on" : ""}" data-cat="${c.id}" style="--a:${c.a};--b:${c.b}">${c.ic} ${esc(c.t)}</button>`).join("")}</div>`;
+const feedHTML = () => `<div class="feed" id="feed"></div><div class="more" id="feedEnd"></div>`;
+
+function pageHome(){
+  navOn("home");
+  const chs = state.cat === "all" ? D.channels : D.channels.filter(c => c.cats.includes(state.cat)), cat = catOf(state.cat);
+  $("main").innerHTML = chipsHTML() +
+    `<div class="sec">${state.cat === "all" ? "🌟 كل القنوات" : cat.ic + " " + esc(cat.t)} <small>${chs.length} قناة</small></div>
+     <div class="shelf">${chs.map(chBtn).join("")}</div><div class="sec">🎬 مقاطع لك</div>` + feedHTML() +
+    `<div class="foot">لولوتيوب · قنوات هادفة فقط · تصميم <b>لوجيكال كود</b></div>`;
+  feed(mix(chs));
+  const on = document.querySelector(".chip.on"); if (on) on.scrollIntoView({inline:"center", block:"nearest"});
+}
+function pageChannel(id){
+  navOn("channels");
+  const c = CH[id]; if (!c) return pageHome();
+  const cat = catOf(c.cats[0]);
+  $("main").innerHTML = `<div class="banner" style="--a:${cat.a || "#a78bfa"};--b:${cat.b || "#f472b6"}"></div>
+    <div class="chead"><div class="ring"><img src="${esc(c.av)}" alt=""></div><div><b>${esc(c.n)}</b><small>${esc(c.s || "")}</small><br><small>${c.cats.map(x => catOf(x).ic + " " + esc(catOf(x).t)).join(" · ")}</small></div></div>` + feedHTML();
+  feed((c.v || []).map(x => VID[x[0]]).filter(Boolean), () => liveChannel(c)); scrollTo(0, 0);
+}
+function pageChannels(){
+  navOn("channels");
+  $("main").innerHTML = D.cats.filter(c => c.id !== "all").map(cat => {
+    const chs = D.channels.filter(c => c.cats.includes(cat.id)); if (!chs.length) return "";
+    return `<div class="sec">${cat.ic} ${esc(cat.t)} <small>${chs.length}</small></div><div class="cgrid">${chs.map(chBtn).join("")}</div>`;
+  }).join("") + `<div class="foot">تصميم <b>لوجيكال كود</b></div>`;
+  scrollTo(0, 0);
+}
+function pageList(kind){
+  navOn(kind);
+  const list = (kind === "fav" ? favs : hist).map(id => VID[id]).filter(Boolean);
+  $("main").innerHTML = `<div class="sec">${kind === "fav" ? "💖 المفضلة" : "🕘 شاهدتُ مؤخراً"}</div>` +
+    (list.length ? feedHTML() : `<div class="empty"><span>${kind === "fav" ? "💝" : "🎈"}</span>${kind === "fav" ? "اضغط القلب 💖 على أي مقطع ليظهر هنا" : "لم تشاهد شيئاً بعد"}</div>`);
+  if (list.length) feed(list);
+  scrollTo(0, 0);
+}
+function pageSearch(q){
+  navOn("");
+  const n = s => String(s || "").toLowerCase().replace(/[ً-ْـ]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي");
+  const w = n(q).split(/\s+/).filter(Boolean);
+  const chs = D.channels.filter(c => w.every(x => n(c.n).includes(x)));
+  const vs = Object.values(VID).filter(v => w.every(x => n(v.t + " " + (CH[v.c] || {}).n).includes(x))).slice(0, 150);
+  $("main").innerHTML = `<div class="sec">🔍 ${esc(q)} <small>${vs.length} مقطع</small></div>` + (chs.length ? `<div class="shelf">${chs.map(chBtn).join("")}</div>` : "") +
+    (vs.length ? feedHTML() : `<div class="empty"><span>🤔</span>لم نجد شيئاً… جرّب كلمة أخرى</div>`);
+  if (vs.length) feed(vs);
+  scrollTo(0, 0);
+}
+function pageWatch(id){
+  navOn("");
+  const v = VID[id]; if (!v) return pageHome();
+  const c = CH[v.c] || {};
+  hist = [id].concat(hist.filter(x => x !== id)).slice(0, 80); store.set("hist", hist);
+  const all = (c.v || []).map(x => VID[x[0]]).filter(Boolean), i0 = all.findIndex(x => x.id === id);
+  const after = all.slice(i0 + 1).concat(all.slice(0, Math.max(i0, 0)));
+  const rel = mix(D.channels.filter(x => x.id !== c.id && x.cats.some(k => (c.cats || []).includes(k)))).slice(0, 30);
+  // rel=0: يوتيوب يقترح من القناة نفسها فقط. والقائمة تكمل تلقائياً بمقاطع القناة المختارة.
+  const src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&playlist=" + [id].concat(after.slice(0, 40).map(x => x.id)).join(",");
+  $("main").innerHTML = `<div class="watch">
+    <div><div class="player"><iframe src="${src}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+      <div class="wt"><h1>${esc(v.t)}</h1>
+        <div class="row"><img src="${esc(c.av)}" alt="" data-ch="${esc(c.id)}"><div class="who" data-ch="${esc(c.id)}"><b>${esc(c.n)}</b><small>${esc(c.s || "")}</small></div>
+          <button class="pill ghost" data-heart="${id}">${favs.includes(id) ? "💖 في المفضلة" : "🤍 أحببته"}</button></div></div></div>
+    <div class="next"><div class="sec">⏭️ التالي</div>${feedHTML()}</div></div>`;
+  feed(after.slice(0, 24).concat(rel)); scrollTo(0, 0);
+}
+
+/* ============ جلب مقاطع أقدم من القناة (مصدر مفتوح، اختياري) ============ */
 const PIPED = ["https://api.piped.private.coffee"];
-const INVID = ["https://invidious.f5.si"];
-const LIVE = {};
-const hms = s => { s = +s; if (!(s > 0)) return ""; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = Math.floor(s % 60); return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
-const cut = (s, n) => { s = String(s || "").replace(/\s+/g, " ").trim(); return s.length > n ? s.slice(0, n - 1) + "…" : s; };
-const unent = s => { const t = document.createElement("textarea"); t.innerHTML = s || ""; return t.value; };
-async function getJSON(u){ const c = new AbortController(), tm = setTimeout(() => c.abort(), 9000); try { const r = await fetch(u, {signal:c.signal}); if (!r.ok) throw new Error(r.status); return await r.json(); } finally { clearTimeout(tm); } }
-function liveQ(){
-  if (view.cat === "@search") return view.label;
-  if (view.rec) return "تلاوة " + view.rec;
-  const cat = CATS.find(c => c.id === view.cat);
-  return cat && view.item != null ? cat.items[view.item].q : null;
-}
-const PROVIDERS = [
-  async (q, st) => {            // يوتيوب الرسمي (إن وُجد مفتاح)
-    if (!YT_API_KEY) throw 0;
-    const j = await getJSON("https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=25&q=" + encodeURIComponent(q) + "&key=" + YT_API_KEY + (st.tok ? "&pageToken=" + st.tok : ""));
-    st.tok = j.nextPageToken || null; if (!st.tok) st.end = true;
-    return (j.items || []).map(x => [x.id.videoId, cut(unent(x.snippet.title), 72), cut(unent(x.snippet.channelTitle), 28), ""]);
-  },
-  async (q, st) => {
-    let last;
-    for (const b of PIPED){ try {
-      const j = await getJSON(b + (st.tok ? "/nextpage/search?nextpage=" + encodeURIComponent(st.tok) + "&" : "/search?") + "q=" + encodeURIComponent(q) + "&filter=videos");
-      st.tok = j.nextpage || null; if (!st.tok) st.end = true;
-      return (j.items || []).filter(x => x.url && /[?&]v=/.test(x.url)).map(x => [x.url.split("v=")[1].slice(0, 11), cut(x.title, 72), cut(x.uploaderName, 28), hms(x.duration)]);
-    } catch(e){ last = e; } }
-    throw last || 0;
-  },
-  async (q, st) => {
-    st.page = (st.page || 0) + 1; let last;
-    for (const b of INVID){ try {
-      const j = await getJSON(b + "/api/v1/search?type=video&page=" + st.page + "&q=" + encodeURIComponent(q));
-      if (!Array.isArray(j)) throw new Error("bad"); if (!j.length) st.end = true;
-      return j.filter(x => x.videoId).map(x => [x.videoId, cut(x.title, 72), cut(x.author, 28), hms(x.lengthSeconds)]);
-    } catch(e){ last = e; } }
-    st.page--; throw last || 0;
+async function getJSON(u){ const ac = new AbortController(), tm = setTimeout(() => ac.abort(), 9000); try { const r = await fetch(u, {signal:ac.signal}); if (!r.ok) throw 0; return await r.json(); } finally { clearTimeout(tm); } }
+const hms = s => { s = +s; if (!(s > 0)) return ""; const h = Math.floor(s/3600), m = Math.floor(s%3600/60), x = Math.floor(s%60); return (h ? h + ":" + String(m).padStart(2,"0") : m) + ":" + String(x).padStart(2,"0"); };
+async function liveChannel(c){
+  c._lv = c._lv || {}; if (c._lv.end) return [];
+  for (const b of PIPED){
+    try {
+      for (let k = 0; k < 3; k++){
+        const j = await getJSON(b + (c._lv.tok ? "/nextpage/channel/" + c.id + "?nextpage=" + encodeURIComponent(c._lv.tok) : "/channel/" + c.id));
+        c._lv.tok = j.nextpage || null; if (!c._lv.tok) c._lv.end = true;
+        const out = [];
+        (j.relatedStreams || []).forEach(s => { const id = ((s.url || "").split("v=")[1] || "").slice(0, 11); if (!id || VID[id] || s.isShort) return;
+          const v = {id, t:s.title, c:c.id, d:hms(s.duration), a:s.uploadedDate || ""}; VID[id] = v; c.v.push([id]); out.push(v); });
+        if (out.length || c._lv.end) return out;
+      }
+    } catch(e){}
   }
-];
-async function liveMore(q){
-  const L = LIVE[q] || (LIVE[q] = {p:0, st:{}, done:false});
-  while (L.p < PROVIDERS.length){
-    try { const rows = await PROVIDERS[L.p](q, L.st); if (L.st.end) L.done = true; return rows; }
-    catch(e){ L.p++; L.st = {}; }
-  }
-  L.failed = true; throw new Error("no provider");
-}
-let moreBusy = false;
-async function loadMore(){
-  const q = liveQ(), el = $("vids"); if (!q || !el || moreBusy) return;
-  const L = LIVE[q]; if (L && (L.done || L.failed)) return endCard(q, L);
-  moreBusy = true;
-  el.insertAdjacentHTML("beforeend", `<div class="more" id="moreL"><div><div class="sp"></div>جارٍ جلب المزيد من يوتيوب…</div></div>`);
-  const list = view.list; let rows = [], ok = true;
-  try { for (let k = 0; k < 3 && !rows.length; k++){ const r = await liveMore(q); const have = new Set(list.map(v => v[0])); rows = r.filter(v => v[0] && !have.has(v[0]) && have.add(v[0])); if ((LIVE[q] || {}).done) break; } } catch(e){ ok = false; }
-  moreBusy = false;
-  const ld = $("moreL"); if (ld) ld.remove();
-  if (liveQ() !== q || view.list !== list || !$("vids")) return;        // المستخدم انتقل إلى عنوان آخر
-  const start = list.length; rows.forEach(v => list.push(v));
-  $("vids").insertAdjacentHTML("beforeend", rows.map((v, k) => cardHTML(v, start + k)).join(""));
-  if (!ok || !rows.length) endCard(q, LIVE[q] || {failed:true});
-}
-function endCard(q, L){
-  const el = $("vids"); if (!el || $("moreE")) return;
-  el.insertAdjacentHTML("beforeend", `<div class="more" id="moreE"><div>${L.failed ? "تعذّر جلب المزيد الآن." : "انتهت النتائج."}<br><a href="${ytSearch(q)}" target="_blank" rel="noopener">تابع في يوتيوب ↗</a></div></div>`);
-}
-function nearEnd(){ const el = $("vids"); if (!el) return; if (el.scrollWidth - el.clientWidth - Math.abs(el.scrollLeft) < el.clientWidth * 1.2) loadMore(); }
-function wireVids(){ const el = $("vids"); if (!el) return; el.addEventListener("scroll", nearEnd, {passive:true}); setTimeout(nearEnd, 60); }
-
-function panel(){ panelDraw(); wireVids(); }
-function panelDraw(){
-  const p = $("panel");
-  const cat = CATS.find(c => c.id === view.cat);
-  if (view.cat === "@fav"){
-    view.list = favs.slice(); view.label = "المفضلة";
-    p.innerHTML = `<div class="head" style="--a:#d8a94a;--b:#8a5d0c"><span class="ic">★</span><div><h2>المفضلة</h2><p>المقاطع التي حفظتها بالنجمة</p></div></div>` +
-      (favs.length ? vidsHTML(view.list) : `<div class="empty">اضغط على النجمة ★ في أي مقطع ليظهر هنا.</div>`);
-    return;
-  }
-  if (view.cat === "@search"){
-    p.innerHTML = `<div class="head" style="--a:#475569;--b:#1e293b"><span class="ic">🔍</span><div><h2>نتائج البحث</h2><p>${esc(view.label)}</p></div></div>
-      <div class="sub"><small>اسحب أو استعمل الأسهم لجلب المزيد من يوتيوب</small><a href="${ytSearch(view.label)}" target="_blank" rel="noopener">ابحث في يوتيوب ↗</a></div>` + vidsHTML(view.list);
-    return;
-  }
-  if (!cat){
-    p.innerHTML = `<div class="empty" style="font-size:16px">اختر قسماً من الأزرار الملونة، ثم اختر مقطعاً. المقطع يُعرض في الشاشة أعلاه، والشاشة تبقى ثابتة أثناء التمرير.</div>`;
-    return;
-  }
-  const head = `<div class="head" style="--a:${cat.a};--b:${cat.b}"><span class="ic" aria-hidden="true">${cat.ic}</span><div><h2>${esc(cat.t)}</h2><p>${esc(cat.d)}</p></div></div>`;
-  let h = cat.quran ? head : "";
-  const st = `style="--a:${cat.a};--b:${cat.b}"`;
-  if (cat.quran){
-    const s = store.get("misk-surah", "");
-    h += `<div class="pick"><label for="surah">السورة</label><select id="surah"><option value="">المصحف كاملاً</option>${SURAHS.map((n, i) => `<option value="${i}" ${String(i) === String(s) ? "selected" : ""}>${i + 1}. سورة ${n}</option>`).join("")}</select></div>
-      <div class="sub">القرّاء <small>${RECITERS.length} قارئاً — اختر السورة ثم القارئ</small></div>
-      <div class="chips">${RECITERS.map(r => `<button class="chip ${view.rec === r ? "on" : ""}" ${st} data-rec="${esc(r)}">${esc(r)}</button>`).join("")}</div>
-      <div class="sub">مختارات</div>`;
-  }
-  if (cat.kids) h += `<div class="khead"><span>🌈</span><div><b>ركن الأطفال</b><small>كرتون، قصص، أناشيد، تعليم وبناء شخصية</small></div><span>🎈</span></div><div class="kgrid">${cat.items.map((it, i) => `<button class="ktile ${view.item === i ? "on" : ""}" style="--a:${it.a};--b:${it.b}" data-item="${i}"><span>${it.ic}</span><b>${esc(it.t)}</b></button>`).join("")}</div>`;
-  else h += `${cat.quran ? "" : '<div class="crow"><button class="arw sm" data-carw="-1" aria-label="السابق" title="السابق">›</button>'}<div class="chips" ${cat.quran ? "" : 'id="chipsRow"'}>${cat.quran ? "" : head}${cat.items.map((it, i) => `<button class="chip ${view.item === i && !view.rec ? "on" : ""}" ${st} data-item="${i}">${esc(it.t)}</button>`).join("")}</div>${cat.quran ? "" : '<button class="arw sm" data-carw="1" aria-label="التالي" title="التالي">‹</button></div>'}`;
-  if (view.rec){
-    const R = DATA.rec[view.rec] || {v:[]};
-    const s = store.get("misk-surah", ""), sn = s === "" ? "" : SURAHS[+s];
-    if (R.pl) h += `<button class="plcard" data-pl="1"><i>▶</i><span>${sn && R.ord ? "سورة " + esc(sn) : "المصحف كاملاً"} — ${esc(view.rec)}<small>${esc(R.plt || "قائمة تشغيل")}</small></span></button>`;
-    if (sn && !R.ord) h += `<p class="note">قائمة هذا القارئ غير مرتبة بالسور. <a href="${ytSearch("سورة " + sn + " بصوت " + view.rec)}" target="_blank" rel="noopener">سورة ${esc(sn)} بصوت ${esc(view.rec)} في يوتيوب ↗</a></p>`;
-    h += `<div class="sub">تلاوات ${esc(view.rec)}<a href="${ytSearch("تلاوة " + view.rec)}" target="_blank" rel="noopener">المزيد في يوتيوب ↗</a></div>` + vidsHTML(view.list);
-  } else if (view.item != null){
-    const it = cat.items[view.item];
-    h += `<div class="sub">${esc(it.t)} <small>الأسهم تجلب المزيد من يوتيوب</small><a href="${ytSearch(it.q)}" target="_blank" rel="noopener">المزيد في يوتيوب ↗</a></div>` + vidsHTML(view.list);
-  }
-  p.innerHTML = h;
+  return [];
 }
 
-function openCat(id, quiet){
-  const cat = CATS.find(c => c.id === id); if (!cat) return;
-  view = {cat:id, item:0, rec:null, list:DATA.items[cat.items[0].q] || [], label:cat.items[0].t};
-  sides(); panel();
-  if (cur.type == null && view.list.length) cue(view.list, 0);
-  if (!quiet && matchMedia("(max-width:980px)").matches) $("panel").scrollIntoView({block:"nearest", behavior:"smooth"});
-}
-function openItem(i){
-  const cat = CATS.find(c => c.id === view.cat);
-  view.item = i; view.rec = null; view.list = DATA.items[cat.items[i].q] || []; view.label = cat.items[i].t; panel();
-}
-function openRec(r){
-  const R = DATA.rec[r] || {v:[]};
-  view.rec = r; view.item = null; view.list = R.v || []; view.label = r; panel();
-  if (R.pl) playRec(); else if (view.list.length) play(view.list, 0);
-}
-function playRec(){
-  const R = DATA.rec[view.rec]; if (!R || !R.pl) return;
-  const s = store.get("misk-surah", ""); const idx = (s !== "" && R.ord) ? +s : 0;
-  cur = {type:"pl", list:[], idx, pl:R.pl, title:(idx || s === "0" ? "سورة " + SURAHS[idx] + " — " : "المصحف كاملاً — ") + view.rec};
-  ensure(() => player.loadPlaylist({list:R.pl, listType:"playlist", index:idx}));
-  nowBar();
-}
-
-/* ================== المشغّل ================== */
-let player = null, ready = false, apiReady = false, pending = null, errRun = 0;
-window.onYouTubeIframeAPIReady = () => { apiReady = true; if (pending) { const p = pending; pending = null; ensure(p); } };
-function ensure(cb){
-  if (player && ready) return cb();
-  pending = cb;
-  if (!apiReady){
-    if (!document.getElementById("ytapi")){ const s = document.createElement("script"); s.id = "ytapi"; s.src = "https://www.youtube.com/iframe_api"; s.onerror = () => toast("تعذّر الاتصال بيوتيوب. تحقق من الإنترنت."); document.head.appendChild(s); }
-    return;
-  }
-  if (!player){
-    $("screen").innerHTML = '<div id="yt"></div>';
-    player = new YT.Player("yt", {width:"100%", height:"100%", playerVars:Object.assign({rel:0, playsinline:1, hl:LANG}, capLang ? {cc_load_policy:1, cc_lang_pref:capLang} : {}),
-      events:{ onReady:() => { ready = true; capBar(); if (pending){ const p = pending; pending = null; p(); } }, onStateChange:onState, onError:onErr }});
-  }
-}
-function cue(list, i){ cur = {type:"vids", list:list.slice(), idx:i, pl:null, title:""}; ensure(() => player.cuePlaylist(cur.list.map(v => v[0]), i)); nowBar(); mark(); }
-function play(list, i){ errRun = 0; const s = Math.max(0, i - 20); cur = {type:"vids", list:list.slice(s, s + 150), idx:i - s, pl:null, title:""}; i = cur.idx; ensure(() => player.loadPlaylist(cur.list.map(v => v[0]), i)); nowBar(); mark(); }
-let autoDone = false;
-function autoStart(){                       // يشغّل النشيد تلقائياً عند فتح الصفحة
-  if (autoDone || !view.list.length) return; autoDone = true;
-  play(view.list, 0);
-  const check = (n) => {
-    let s = -2; try { s = player.getPlayerState(); } catch(e){}
-    if (s === 1) return;                                   // يعمل بالصوت
-    if ((s === 3 || s === -2) && n < 6) return setTimeout(() => check(n + 1), 700);
-    // المتصفح منع الصوت قبل أول لمسة: نشغّل الصورة فوراً، والصوت يعود تلقائياً مع أول لمسة
-    try { player.mute(); player.playVideo(); } catch(e){}
-    const hint = document.createElement("div"); hint.id = "sndHint"; hint.textContent = "🔇 المس أي مكان لتشغيل الصوت";
-    $("screen").appendChild(hint);
-    const on = () => { ["pointerdown","touchend","keydown"].forEach(ev => document.removeEventListener(ev, on, true));
-      try { player.unMute(); player.setVolume(100); player.playVideo(); } catch(e){} hint.remove(); };
-    ["pointerdown","touchend","keydown"].forEach(ev => document.addEventListener(ev, on, true));
-  };
-  setTimeout(() => check(0), 1800);
-}
-let capLang = store.get("misk-cap", null); if (capLang !== "de" && capLang !== "en" && capLang !== "") capLang = RTL ? "" : LANG;
-let capVid = "", capTries = 0;
-function captions(){            // ترجمة الفيديو: مسار بلغتها إن وُجد، وإلا ترجمة يوتيوب الآلية للنص
-  if (!capLang || !player || !player.setOption) return false;
-  try {
-    const vid = (player.getVideoData() || {}).video_id || ""; if (!vid) return false;
-    if (capVid !== vid){ capVid = vid; capTries = 0; }
-    player.loadModule && player.loadModule("captions");
-    const cur = player.getOption("captions", "track") || {}, list = player.getOption("captions", "tracklist") || [];
-    const tls = player.getOption("captions", "translationLanguages") || [];
-    if (!cur.languageCode && !list.length && !tls.length) return false;      // النص لم يجهز بعد، أو لا نص لهذا المقطع
-    if (capTries >= 5) return true;          // نكرر الطلب عدة مرات لأن يوتيوب يتجاهله قبل أن يجهز النص
-    const is = t => t && (t.languageCode || "").slice(0, 2) === capLang;
-    capTries++;
-    const own = is(cur) ? cur : list.find(is);
-    if (own){ const o = Object.assign({}, own); delete o.translationLanguage; player.setOption("captions", "track", o); return true; }
-    const tl = tls.find(t => t.languageCode === capLang) || {languageCode: capLang, languageName: capLang === "de" ? "Deutsch" : "English"};
-    const b = Object.assign({}, cur.languageCode ? cur : (list[0] || {languageCode:"ar", kind:"asr"})); delete b.translationLanguage;
-    player.setOption("captions", "track", Object.assign(b, {translationLanguage: tl})); return true;
-  } catch(e){ return false; }
-}
-function capBar(){              // أزرار الأعلام فوق الفيديو
-  let b = $("capbar");
-  if (!b){
-    b = document.createElement("div"); b.id = "capbar"; b.className = "capbar";
-    const flag = l => (document.querySelector('.lg[data-lang="' + l + '"]') || {}).innerHTML || l.toUpperCase();
-    b.innerHTML = `<button type="button" data-cap="de" title="ترجمة الفيديو إلى الألمانية" aria-label="ترجمة الفيديو إلى الألمانية">${flag("de")}</button><button type="button" data-cap="en" title="ترجمة الفيديو إلى الإنجليزية" aria-label="ترجمة الفيديو إلى الإنجليزية">${flag("en")}</button><button type="button" data-cap="" title="إيقاف الترجمة" aria-label="إيقاف الترجمة">✕</button>`;
-    b.addEventListener("click", e => { const t = e.target.closest("[data-cap]"); if (t) setCap(t.dataset.cap); });
-  }
-  if (b.parentNode !== $("screen")) $("screen").appendChild(b);
-  b.querySelectorAll("[data-cap]").forEach(x => x.classList.toggle("on", x.dataset.cap === capLang && capLang !== ""));
-}
-function setCap(l){
-  capLang = l; store.set("misk-cap", l); capVid = ""; capTries = 0; capBar();
-  if (!player || !ready || cur.type == null){ toast("شغّل مقطعاً أولاً، ثم اختر لغة الترجمة."); return; }
-  if (!l){ try { player.unloadModule && player.unloadModule("captions"); } catch(e){} toast("أُوقفت الترجمة."); return; }
-  toast(l === "de" ? "جارٍ تفعيل الترجمة الألمانية…" : "جارٍ تفعيل الترجمة الإنجليزية…");
-  let ok = false; [0, 700, 1800, 3500, 6000].forEach(ms => setTimeout(() => { if (captions()) ok = true; }, ms));
-  setTimeout(() => { if (!ok && capLang === l) toast("لا يوجد نص مكتوب لهذا المقطع في يوتيوب، فلا يمكن ترجمته."); }, 7500);
-}
-function onState(e){
-  if (e.data === 1){ errRun = 0; [800, 2000, 4000, 7000, 11000, 16000, 24000, 35000].forEach(ms => setTimeout(captions, ms)); }
-  if (e.data === 1 || e.data === 3 || e.data === -1 || e.data === 5){
-    const i = player.getPlaylistIndex ? player.getPlaylistIndex() : -1;
-    if (i >= 0 && i !== cur.idx){ cur.idx = i; if (cur.type === "pl") cur.title = (i < SURAHS.length && (DATA.rec[view.rec] || {}).ord ? "سورة " + SURAHS[i] + " — " : "") + (view.rec || ""); }
-    nowBar(); mark();
-  }
-}
-function onErr(){
-  errRun++;
-  const n = cur.type === "vids" ? cur.list.length : 6;
-  if (errRun < n && player.nextVideo){ toast("هذا المقطع لا يسمح بالعرض هنا. ننتقل إلى التالي."); player.nextVideo(); }
-  else toast("تعذّر تشغيل المقاطع هنا. افتحها في يوتيوب من زر ↗");
-}
-function nowBar(){
-  const v = cur.type === "vids" ? cur.list[cur.idx] : null;
-  let title = "شاشة العرض", sub = "لم يُختر مقطع بعد", id = "";
-  if (v){ title = tt(v); sub = v[2]; id = v[0]; }
-  else if (cur.type === "pl"){ title = cur.title || "قائمة تشغيل"; sub = "قائمة تشغيل"; try { const d = player && player.getVideoData && player.getVideoData(); if (d && d.video_id){ id = d.video_id; if (d.title) sub = d.title; } } catch(e){} }
-  $("nowT").innerHTML = esc(title) + `<small>${esc(sub)}</small>`;
-  const on = cur.type != null;
-  $("prev").disabled = $("next").disabled = !on; $("nowFav").disabled = !v;
-  $("nowFav").classList.toggle("on", !!v && isFav(v[0]));
-  const a = $("nowYT"); a.hidden = !on;
-  a.href = cur.type === "pl" ? "https://www.youtube.com/playlist?list=" + cur.pl : (id ? "https://www.youtube.com/watch?v=" + id : "#");
-}
-function mark(){
-  const id = cur.type === "vids" && cur.list[cur.idx] ? cur.list[cur.idx][0] : "";
-  document.querySelectorAll(".v").forEach(el => el.classList.toggle("on", !!id && el.dataset.id === id));
-}
-function toggleFav(v){
-  if (!v) return;
-  if (isFav(v[0])) favs = favs.filter(f => f[0] !== v[0]); else favs.unshift(v.slice(0, 4));
-  store.set("misk-favs2", favs);
-}
-
-/* ================== البحث في الفهرس ================== */
-const norm = s => String(s || "").toLowerCase().replace(/[ً-ْٰـ]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي");
-function search(q){
-  const words = norm(q).split(/\s+/).filter(Boolean); if (!words.length) return;
-  const seen = new Set(), out = [];
-  const add = (v, extra) => { if (seen.has(v[0])) return; const hay = norm(v[1] + " " + v[2] + " " + extra); if (words.every(w => hay.includes(w))){ seen.add(v[0]); out.push(v); } };
-  for (const k in DATA.items) DATA.items[k].forEach(v => add(v, k));
-  for (const r in DATA.rec) (DATA.rec[r].v || []).forEach(v => add(v, r));
-  view = {cat:"@search", item:null, rec:null, list:out.slice(0, 40), label:q};
-  sides(); panel();
-}
-
-/* ================== الأحداث ================== */
-document.addEventListener("click", e => {
-  const c = e.target.closest("[data-cat]"); if (c){ location.hash = "#/" + c.dataset.cat; if (view.cat === c.dataset.cat) openCat(c.dataset.cat); return; }
-  const f = e.target.closest("[data-fav]");
-  if (f){ e.stopPropagation(); toggleFav(view.list[+f.dataset.fav]); if (view.cat === "@fav") panel(); else f.classList.toggle("on"); nowBar(); return; }
-  const ar = e.target.closest("[data-arw]"); if (ar){ const el = $("vids"), d = +ar.dataset.arw; if (el){ el.scrollBy({left: DIRF * d * el.clientWidth * 0.85, behavior:"smooth"}); if (d > 0) setTimeout(nearEnd, 350); } return; }
-  const ca = e.target.closest("[data-carw]"); if (ca){ const el = $("chipsRow"); if (el) el.scrollBy({left: DIRF * (+ca.dataset.carw) * el.clientWidth * 0.7, behavior:"smooth"}); return; }
-  const it = e.target.closest("[data-item]"); if (it){ openItem(+it.dataset.item); return; }
-  const r = e.target.closest("[data-rec]"); if (r){ openRec(r.dataset.rec); return; }
-  if (e.target.closest("[data-pl]")){ playRec(); return; }
-  const v = e.target.closest("[data-play]"); if (v){ play(view.list, +v.dataset.play); return; }
-});
-document.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches(".v")){ e.preventDefault(); e.target.click(); } });
-document.addEventListener("change", e => { if (e.target.id === "surah"){ store.set("misk-surah", e.target.value); if (view.rec){ panel(); if ((DATA.rec[view.rec] || {}).ord) playRec(); } } });
-$("prev").onclick = () => player && ready && player.previousVideo();
-$("next").onclick = () => player && ready && player.nextVideo();
-$("nowFav").onclick = () => { if (cur.type === "vids"){ toggleFav(cur.list[cur.idx]); nowBar(); panel(); } };
-document.querySelectorAll(".lg").forEach(b => { b.classList.toggle("on", b.dataset.lang === LANG); b.onclick = () => { if (b.dataset.lang === LANG) return; store.set("misk-lang", b.dataset.lang); const u = new URL(location.href); u.searchParams.delete("lang"); location.href = u.toString(); if (u.toString() === location.href) location.reload(); }; });
-$("favBtn").onclick = () => { location.hash = "#/@fav"; };
-$("home").onclick = () => { location.hash = "#/"; scrollTo({top:0, behavior:"smooth"}); };
-$("find").onsubmit = e => { e.preventDefault(); const q = $("q").value.trim(); if (q){ history.replaceState(null, "", "#/"); search(q); $("find").classList.remove("open"); } };
-$("findBtn").onclick = () => { $("find").classList.toggle("open"); $("q").focus(); };
-
+/* ============ التنقل ============ */
 function route(){
-  const id = decodeURIComponent(location.hash.replace(/^#\/?/, ""));
-  if (id === "@fav"){ view = {cat:"@fav", item:null, rec:null, list:favs.slice(), label:"المفضلة"}; sides(); panel(); }
-  else if (CATS.some(c => c.id === id)) openCat(id);
-  else { openCat("anasheed", true); autoStart(); }
+  const [p, a] = decodeURIComponent(location.hash.replace(/^#\/?/, "")).split("/");
+  if (p === "w") pageWatch(a); else if (p === "c") pageChannel(a); else if (p === "channels") pageChannels();
+  else if (p === "fav" || p === "history") pageList(p); else if (p === "s") pageSearch(a || ""); else pageHome();
 }
 window.addEventListener("hashchange", route);
+document.addEventListener("click", e => {
+  const hb = e.target.closest("[data-heart]");
+  if (hb){ e.stopPropagation(); const id = hb.dataset.heart, on = !favs.includes(id);
+    favs = on ? [id].concat(favs) : favs.filter(x => x !== id); store.set("favs", favs);
+    document.querySelectorAll(`[data-heart="${id}"]`).forEach(b => { b.classList.toggle("on", on); if (b.classList.contains("pill")) b.textContent = on ? "💖 في المفضلة" : "🤍 أحببته"; });
+    toast(on ? "أُضيف إلى المفضلة 💖" : "أُزيل من المفضلة"); return; }
+  const ch = e.target.closest("[data-ch]"); if (ch){ location.hash = "#/c/" + ch.dataset.ch; return; }
+  const v = e.target.closest("[data-v]"); if (v){ location.hash = "#/w/" + v.dataset.v; return; }
+  const ct = e.target.closest("[data-cat]"); if (ct){ state.cat = ct.dataset.cat; store.set("cat", state.cat); pageHome(); return; }
+  const n = e.target.closest("[data-nav]"); if (n){ const h = n.dataset.nav === "home" ? "#/" : "#/" + n.dataset.nav; if (location.hash === h) route(); else location.hash = h; return; }
+});
+$("home").onclick = () => { if (location.hash && location.hash !== "#/") location.hash = "#/"; else pageHome(); scrollTo(0, 0); };
+$("searchBtn").onclick = () => { $("search").classList.toggle("open"); if ($("search").classList.contains("open")) $("q").focus(); };
+const doSearch = () => { const q = $("q").value.trim(); if (q) location.hash = "#/s/" + encodeURIComponent(q); };
+$("go").onclick = doSearch; $("q").addEventListener("keydown", e => { if (e.key === "Enter") doSearch(); });
 
-/* المظهر */
-const root = document.documentElement, tb = $("theme");
-function setTheme(t, save){ root.dataset.theme = t; tb.textContent = t === "light" ? "☾" : "☀";
-  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = t === "light" ? "#f5f1e6" : "#0b1f1a";
-  if (save) store.set("misk-theme2", t); }
-setTheme(store.get("misk-theme2", "light"));          // الوضع النهاري هو القياسي
-tb.onclick = () => setTheme(root.dataset.theme === "light" ? "dark" : "light", true);
-
-/* عدّاد الزوار: زيارة واحدة لكل متصفح في اليوم */
-(function(){
-  const base = "https://abacus.jasoncameron.dev/", key = "almisk-almakhtum/visitors";
-  const today = new Date().toISOString().slice(0, 10), seen = store.get("misk-visit", "") === today;
-  fetch(base + (seen ? "get/" : "hit/") + key).then(r => r.json()).then(d => {
-    if (typeof d.value !== "number") return;
-    store.set("misk-visit", today);
-    const el = $("cnum"), n = d.value, t0 = performance.now(), dur = 1400;
-    $("counter").hidden = false;
-    (function tick(t){ const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = Math.round(n * e).toLocaleString("en-US"); if (k < 1) requestAnimationFrame(tick); })(t0);
-  }).catch(() => {});
-})();
-
-/* تثبيت التطبيق على الهاتف */
-(function(){
-  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
-  const ua = navigator.userAgent, mobile = /Android|iPhone|iPad|iPod/i.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
-  const ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
-  if (standalone || !mobile) return;
-  if (Date.now() - store.get("misk-inst-x", 0) < 3 * 864e5) return;      // أُغلق الشريط: لا يعود قبل 3 أيام
-  let ev = null, shown = false;
-  function show(isIOS){
-    if (shown) return; shown = true;
-    const d = document.createElement("div"); d.className = "inst"; d.id = "inst";
-    d.innerHTML = `<img src="icon-192.png" alt=""><div class="tt">ثبّت تطبيق المسك المختوم<small>${isIOS ? "اضغط زر المشاركة ⬆ ثم «إضافة إلى الشاشة الرئيسية»" : "يفتح من شاشة هاتفك مباشرة، وبملء الشاشة"}</small></div>${isIOS ? "" : '<button class="go" type="button">تثبيت</button>'}<button class="x" type="button" aria-label="إغلاق">✕</button>`;
-    document.body.appendChild(d);
-    d.querySelector(".x").onclick = () => { store.set("misk-inst-x", Date.now()); d.remove(); };
-    const go = d.querySelector(".go");
-    if (go) go.onclick = async () => { if (!ev) return; ev.prompt(); try { await ev.userChoice; } catch(e){} ev = null; d.remove(); };
-  }
-  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); ev = e; show(false); });
-  window.addEventListener("appinstalled", () => { const d = $("inst"); if (d) d.remove(); });
-  if (ios) setTimeout(() => show(true), 2500);
-})();
-
-/* البداية */
-sides(); panel();
-fetch("data.json?v=20261010c").then(r => r.json()).then(d => { DATA = d; route(); }).catch(() => { $("panel").innerHTML = '<div class="empty">تعذّر تحميل فهرس المقاطع. أعد تحميل الصفحة.</div>'; });
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+/* ============ البداية ============ */
+state.cat = store.get("cat", "all");
+fetch("data.json?v=1").then(r => r.json()).then(d => {
+  D = d; D.channels.forEach(c => { CH[c.id] = c; (c.v || []).forEach(x => { VID[x[0]] = {id:x[0], t:x[1], c:c.id, d:x[2] || "", a:x[3] || ""}; }); });
+  if (!D.cats.some(c => c.id === state.cat)) state.cat = "all";
+  route();
+}).catch(() => { $("main").innerHTML = '<div class="empty"><span>😕</span>تعذّر التحميل، أعد فتح الصفحة</div>'; });
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 </script>
 </body>
 </html>

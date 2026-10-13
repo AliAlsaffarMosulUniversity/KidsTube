@@ -1,7 +1,7 @@
 {
-  "name": "المسك المختوم",
-  "short_name": "المسك المختوم",
-  "description": "نافذتك على المحتوى الإسلامي في يوتيوب: القرآن الكريم، التفسير، الحديث، الخطب، الدعوة، والأذكار.",
+  "name": "LoLoTube لولوتيوب",
+  "short_name": "LoLoTube",
+  "description": "يوتيوب مفلتر للأطفال: قنوات هادفة فقط — دينية، أخلاقية، فكرية، تعليمية، ترفيهية، رياضية، ولغات ونطق.",
   "lang": "ar",
   "dir": "rtl",
   "id": "./",
@@ -9,9 +9,9 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#07140f",
-  "theme_color": "#0b1f1a",
-  "categories": ["education", "lifestyle"],
+  "background_color": "#fdf6ff",
+  "theme_color": "#a855f7",
+  "categories": ["kids", "education", "entertainment"],
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },

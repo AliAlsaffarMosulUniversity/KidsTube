@@ -184,6 +184,9 @@ body.girl .logo b{background:linear-gradient(90deg,#db2777,#f472b6,#c026d3,#fb71
 .pcard.b{background:linear-gradient(150deg,#38bdf8,#2563eb 70%); box-shadow:0 12px 26px rgba(37,99,235,.4)}
 .pcard.g{background:linear-gradient(150deg,#f9a8d4,#db2777 70%); box-shadow:0 12px 26px rgba(219,39,119,.4)}
 .pcard.on::after{content:"✓"; position:absolute; top:8px; left:10px; width:26px; height:26px; border-radius:50%; background:#fff; color:#16a34a; font-size:16px; display:grid; place-items:center}
+.pill.full{display:block; width:100%; margin-top:12px; padding:12px 16px; font-size:16px}
+.player:fullscreen{width:100vw; height:100vh; aspect-ratio:auto; border-radius:0; background:#000}
+.player:-webkit-full-screen{width:100vw; height:100vh; aspect-ratio:auto; border-radius:0; background:#000}
 /* قلب الهاتف أفقياً: المقطع يملأ الشاشة */
 @media (orientation:landscape) and (max-height:520px){
   body.watching .watch .player{position:fixed; inset:0; z-index:200; width:100vw; height:100vh; height:100dvh; aspect-ratio:auto; border-radius:0; top:0}
@@ -381,7 +384,8 @@ function pageWatch(id){
     <div><div class="player"><iframe src="${src}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write; web-share; accelerometer; gyroscope" allowfullscreen></iframe></div>
       <div class="wt"><h1>${esc(v.t)}</h1>
         <div class="row"><img src="${esc(c.av)}" alt="" data-ch="${esc(c.id)}"><div class="who" data-ch="${esc(c.id)}"><b>${esc(c.n)}</b><small>${esc(c.s || "")}</small></div>
-          <button class="pill ghost" data-heart="${id}">${favs.includes(id) ? "💖 في المفضلة" : "🤍 أحببته"}</button></div></div></div>
+          <button class="pill ghost" data-heart="${id}">${favs.includes(id) ? "💖 في المفضلة" : "🤍 أحببته"}</button></div>
+        <button class="pill full" id="fullBtn">📺 شاشة كاملة بالعرض</button></div></div>
     <div class="next"><div class="sec">⏭️ التالي</div>${feedHTML()}</div></div>`;
   feed(after.slice(0, 24).concat(rel)); scrollTo(0, 0);
 }
@@ -430,6 +434,18 @@ document.addEventListener("click", e => {
   const n = e.target.closest("[data-nav]"); if (n){ const h = n.dataset.nav === "home" ? "#/" : "#/" + n.dataset.nav; if (location.hash === h) route(); else location.hash = h; return; }
 });
 $("home").onclick = () => { if (location.hash && location.hash !== "#/") location.hash = "#/"; else pageHome(); scrollTo(0, 0); };
+/* شاشة كاملة بالعرض: يعمل حتى لو كان دوران الهاتف مقفلاً */
+async function goFull(){
+  const pl = document.querySelector(".player"); if (!pl) return;
+  try {
+    if (pl.requestFullscreen) await pl.requestFullscreen({navigationUI:"hide"});
+    else if (pl.webkitRequestFullscreen) pl.webkitRequestFullscreen();
+    else if (pl.querySelector("iframe").webkitEnterFullscreen) pl.querySelector("iframe").webkitEnterFullscreen();
+  } catch(e){}
+  try { await screen.orientation.lock("landscape"); } catch(e){}
+}
+document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement) { try { screen.orientation.unlock(); } catch(e){} } });
+document.addEventListener("click", e => { if (e.target.closest("#fullBtn")) goFull(); });
 $("sexBtn").onclick = () => $("pick").classList.add("open");
 $("searchBtn").onclick = () => { $("search").classList.toggle("open"); if ($("search").classList.contains("open")) $("q").focus(); };
 const doSearch = () => { const q = $("q").value.trim(); if (q) location.hash = "#/s/" + encodeURIComponent(q); };

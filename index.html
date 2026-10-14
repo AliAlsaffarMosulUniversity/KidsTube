@@ -361,7 +361,7 @@ function pageWatch(id){
   // rel=0: يوتيوب يقترح من القناة نفسها فقط. والقائمة تكمل تلقائياً بمقاطع القناة المختارة.
   const src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&playlist=" + [id].concat(after.slice(0, 40).map(x => x.id)).join(",");
   $("main").innerHTML = `<div class="watch">
-    <div><div class="player"><iframe src="${src}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>${after[0] ? `<button class="skip" data-v="${after[0].id}" title="تخطي إلى المقطع التالي"><b>⏭</b>تخطي</button>` : ""}</div>
+    <div><div class="player"><iframe src="${src}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write; web-share; accelerometer; gyroscope" allowfullscreen></iframe>${after[0] ? `<button class="skip" data-v="${after[0].id}" title="تخطي إلى المقطع التالي"><b>⏭</b>تخطي</button>` : ""}</div>
       <div class="wt"><h1>${esc(v.t)}</h1>
         <div class="row"><img src="${esc(c.av)}" alt="" data-ch="${esc(c.id)}"><div class="who" data-ch="${esc(c.id)}"><b>${esc(c.n)}</b><small>${esc(c.s || "")}</small></div>
           <button class="pill ghost" data-heart="${id}">${favs.includes(id) ? "💖 في المفضلة" : "🤍 أحببته"}</button></div></div></div>

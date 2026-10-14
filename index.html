@@ -184,6 +184,12 @@ body.girl .logo b{background:linear-gradient(90deg,#db2777,#f472b6,#c026d3,#fb71
 .pcard.b{background:linear-gradient(150deg,#38bdf8,#2563eb 70%); box-shadow:0 12px 26px rgba(37,99,235,.4)}
 .pcard.g{background:linear-gradient(150deg,#f9a8d4,#db2777 70%); box-shadow:0 12px 26px rgba(219,39,119,.4)}
 .pcard.on::after{content:"✓"; position:absolute; top:8px; left:10px; width:26px; height:26px; border-radius:50%; background:#fff; color:#16a34a; font-size:16px; display:grid; place-items:center}
+/* قلب الهاتف أفقياً: المقطع يملأ الشاشة */
+@media (orientation:landscape) and (max-height:520px){
+  body.watching .watch .player{position:fixed; inset:0; z-index:200; width:100vw; height:100vh; height:100dvh; aspect-ratio:auto; border-radius:0; top:0}
+  body.watching{overflow:hidden}
+  body.watching .top, body.watching .nav, body.watching .search, body.watching .toast{visibility:hidden}
+}
 @media (prefers-reduced-motion:reduce){ *{animation:none!important} }
 </style>
 </head>
@@ -403,6 +409,7 @@ async function liveChannel(c){
 
 /* ============ التنقل ============ */
 function route(){
+  document.body.classList.toggle("watching", /^#\/?w\//.test(location.hash));
   const [p, a] = decodeURIComponent(location.hash.replace(/^#\/?/, "")).split("/");
   if (p === "w") pageWatch(a); else if (p === "c") pageChannel(a); else if (p === "channels") pageChannels();
   else if (p === "fav" || p === "history") pageList(p); else if (p === "s") pageSearch(a || ""); else pageHome();

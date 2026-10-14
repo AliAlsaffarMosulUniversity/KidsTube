@@ -8,7 +8,7 @@
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#fdf6ff",
   "theme_color": "#a855f7",
   "categories": ["kids", "education", "entertainment"],

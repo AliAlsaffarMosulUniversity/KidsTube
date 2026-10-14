@@ -1,4 +1,4 @@
-const CACHE = "lolotube-v8";
+const CACHE = "lolotube-v9";
 const SHELL = ["./", "index.html", "data.json", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {

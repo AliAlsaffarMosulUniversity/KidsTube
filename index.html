@@ -103,7 +103,10 @@ body.desk .feed{grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); paddi
 .watch .player{position:sticky; top:var(--bar); z-index:25; background:#000; aspect-ratio:16/9}
 body.desk .watch{display:grid; grid-template-columns:minmax(0,1fr) 400px; gap:22px; padding:16px 22px; align-items:start}
 body.desk .watch .player{border-radius:20px; overflow:hidden; top:calc(var(--bar) + 12px); box-shadow:var(--shadow)}
+.player{position:relative}
 .player iframe{width:100%; height:100%; border:0; display:block}
+.skip{position:absolute; top:10px; left:10px; z-index:3; border:0; cursor:pointer; border-radius:999px; padding:7px 14px; font-weight:800; font-size:14.5px; color:#fff; background:rgba(15,10,30,.72); backdrop-filter:blur(6px); box-shadow:0 4px 14px rgba(0,0,0,.35); display:flex; align-items:center; gap:5px; transition:transform .15s}
+.skip:active{transform:scale(.9)} .skip b{background:linear-gradient(135deg,var(--p1),var(--p2)); border-radius:50%; width:22px; height:22px; display:grid; place-items:center; font-size:12px}
 .wt{padding:12px 14px 6px}
 .wt h1{margin:0; font-size:19px; line-height:1.45; font-weight:800}
 .wt .row{display:flex; align-items:center; gap:10px; margin-top:10px}
@@ -145,10 +148,36 @@ body.desk .nav button i{font-size:18px}
 .foot b{color:var(--p1)}
 .toast{position:fixed; bottom:84px; left:50%; transform:translateX(-50%); z-index:60; background:#2b1d4a; color:#fff; padding:9px 16px; border-radius:14px; font-weight:700; opacity:0; transition:.25s; pointer-events:none; max-width:90vw}
 .toast.show{opacity:1}
+/* واجهتان: أزرق للأولاد ووردي للبنات */
+body.boy{--bg:#f2f8ff; --text:#10264d; --muted:#5f7396; --line:rgba(37,99,235,.14); --p1:#2563eb; --p2:#06b6d4; --shadow:0 10px 26px rgba(37,99,235,.18);
+  background:radial-gradient(1200px 700px at 10% -10%,#c7e2ff 0,transparent 60%),radial-gradient(1000px 700px at 110% 10%,#cffafe 0,transparent 60%),radial-gradient(900px 600px at 50% 110%,#dbeafe 0,transparent 60%),#e6f0ff}
+body.girl{--bg:#fff5fa; --text:#4a1d3b; --muted:#94657f; --line:rgba(219,39,119,.14); --p1:#db2777; --p2:#c026d3; --shadow:0 10px 26px rgba(219,39,119,.18);
+  background:radial-gradient(1200px 700px at 10% -10%,#ffd1e8 0,transparent 60%),radial-gradient(1000px 700px at 110% 10%,#f5d0fe 0,transparent 60%),radial-gradient(900px 600px at 50% 110%,#ffe4f1 0,transparent 60%),#ffe9f4}
+body.boy .top,body.boy .search{background:rgba(242,248,255,.92)} body.girl .top,body.girl .search{background:rgba(255,245,250,.92)}
+body.boy .ring{background:conic-gradient(from var(--ang),#2563eb,#06b6d4,#22c55e,#38bdf8,#6366f1,#2563eb)}
+body.girl .ring{background:conic-gradient(from var(--ang),#ec4899,#f472b6,#c026d3,#fb7185,#a855f7,#ec4899)}
+body.boy .th{background:linear-gradient(135deg,#bfdbfe,#a5f3fc)} body.girl .th{background:linear-gradient(135deg,#fbcfe8,#f5d0fe)}
+body.boy .logo b{background:linear-gradient(90deg,#2563eb,#06b6d4,#22c55e,#38bdf8,#2563eb); background-size:300% 100%; -webkit-background-clip:text; background-clip:text}
+body.girl .logo b{background:linear-gradient(90deg,#db2777,#f472b6,#c026d3,#fb7185,#db2777); background-size:300% 100%; -webkit-background-clip:text; background-clip:text}
+#sexBtn{font-size:20px} body.boy #sexBtn{background:linear-gradient(135deg,#dbeafe,#cffafe)} body.girl #sexBtn{background:linear-gradient(135deg,#fce7f3,#fae8ff)}
+.mode{display:inline-flex; align-items:center; gap:4px; font-size:12px; font-weight:800; color:#fff; border-radius:999px; padding:2px 9px; background:linear-gradient(135deg,var(--p1),var(--p2)); margin-inline-start:2px}
+
+/* شاشة اختيار الواجهة */
+.pick{position:fixed; inset:0; z-index:80; display:none; place-items:center; padding:20px; background:rgba(30,20,60,.45); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px)}
+.pick.open{display:grid}
+.pbox{width:min(400px,100%); background:#fff; border-radius:30px; padding:22px 18px 18px; text-align:center; box-shadow:0 30px 80px rgba(0,0,0,.3); animation:pop .4s ease both}
+.pbox h2{margin:0 0 4px; font-size:23px; font-weight:800} .pbox p{margin:0 0 16px; color:#7a6f93; font-weight:600}
+.pgrid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.pcard{border:0; cursor:pointer; border-radius:24px; padding:18px 8px 14px; color:#fff; font-weight:800; font-size:21px; display:flex; flex-direction:column; align-items:center; gap:6px; transition:transform .15s; position:relative; overflow:hidden}
+.pcard:active{transform:scale(.94)} .pcard:hover{transform:translateY(-3px)}
+.pcard span{font-size:62px; line-height:1; animation:wob 3s ease-in-out infinite} .pcard small{font-size:13px; font-weight:700; opacity:.92}
+.pcard.b{background:linear-gradient(150deg,#38bdf8,#2563eb 70%); box-shadow:0 12px 26px rgba(37,99,235,.4)}
+.pcard.g{background:linear-gradient(150deg,#f9a8d4,#db2777 70%); box-shadow:0 12px 26px rgba(219,39,119,.4)}
+.pcard.on::after{content:"✓"; position:absolute; top:8px; left:10px; width:26px; height:26px; border-radius:50%; background:#fff; color:#16a34a; font-size:16px; display:grid; place-items:center}
 @media (prefers-reduced-motion:reduce){ *{animation:none!important} }
 </style>
 </head>
-<body class="phone">
+<body class="phone boy">
 <div class="sky" id="sky"></div>
 <div class="app" id="app">
   <header class="top">
@@ -157,6 +186,7 @@ body.desk .nav button i{font-size:18px}
       <b>LoLoTube</b>
     </button>
     <span class="sp"></span>
+    <button class="ib" id="sexBtn" aria-label="اختيار الواجهة" title="أولاد / بنات">👦</button>
     <button class="ib" id="searchBtn" aria-label="بحث" title="بحث">🔍</button>
     <button class="ib" id="viewBtn" aria-label="طريقة العرض" title="عرض الحاسوب">🖥️</button>
   </header>
@@ -170,6 +200,10 @@ body.desk .nav button i{font-size:18px}
   </nav>
 </div>
 <div class="toast" id="toast"></div>
+<div class="pick" id="pick" role="dialog" aria-label="اختر الواجهة"><div class="pbox">
+  <h2>✨ أهلاً بك في لولوتيوب ✨</h2><p>اختر واجهتك</p>
+  <div class="pgrid"><button class="pcard b" data-sex="b"><span>👦</span>أولاد<small>واجهة زرقاء</small></button>
+  <button class="pcard g" data-sex="g"><span>👧</span>بنات<small>واجهة وردية</small></button></div></div></div>
 
 <script>
 /* ============ أدوات ============ */
@@ -184,6 +218,26 @@ const thumb = id => "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
 let D = {cats:[], channels:[]}, CH = {}, VID = {};
 let favs = store.get("favs", []), hist = store.get("hist", []);
 let state = {cat:"all"};
+
+/* ============ واجهة الأولاد والبنات ============ */
+let sex = store.get("sex", ""); const firstTime = !sex;
+const GIRL = /بنات|البنات|للبنات|بنت |البنت|فتاة|فتيات|محبوبة|أميرة|اميرة|أميرات|الأميرات|الاميرات|دمية|دمى|عروسة|باربي|مكياج|حجاب|فستان|باليه|فراشة|صحابيات|الصحابية|أمهات المؤمنين|princess|girl|doll|barbie|makeup|unicorn|dress|ballet|butterfl|fairy|squishy|cupcake|hijab/i;
+const BOY = /أولاد|للأولاد|الولد|ولد |صبي|سيارة|سيارات|شاحنة|شاحنات|الشاحنة|جرافة|حفارة|قطار|القطار|ديناصور|الديناصورات|روبوت|كرة القدم|كره القدم|البراعم|بطل خارق|فارس|فرسان|الأشبال|\bcars?\b|truck|tractor|excavator|digger|\btrains?\b|dinosaur|\bdino|t-rex|robot|football|soccer|superhero|\bboys?\b|knight|pirate|construction|rocket|monster truck/i;
+const BAD = /krishna|ganesh|hanuman|diwali|\bholi\b|shiva|vishnu|buddha|ramayan|mahabharat|navratri|\bpuja\b|pooja|temple|mytholog|\bgods?\b|goddess|idol|yoga|namaste|chakra|meditat|mindful|zodiac|horoscope|witch|wizard|sorcer|tarot|church|jesus|bible|christmas|easter|santa|halloween|spooky|ghost|vampire|zombie|demon|devil|valentine|\blove\b|kiss|يوغا|معبد|آلهة|أبراج|ساحر|ساحرة|شعوذة|تعويذة|كنيسة|المسيح|كريسماس|هالوين|عيد الحب|بابا نويل|شبح|أشباح|زومبي|شيطان|#shorts|[\u0900-\u0DFF]/i;
+const vSex = t => { const g = GIRL.test(t), b = BOY.test(t); return g && !b ? "g" : b && !g ? "b" : ""; };
+const chOk = c => !c.g || c.g === sex;
+const vOk = v => { const c = CH[v.c]; if (!c || !chOk(c)) return false; if (c.g) return true; const x = v.sx; return !x || x === sex; };
+const mine = v => { const c = CH[v.c]; return c && (c.g === sex || (!c.g && v.sx === sex)); };
+const sexName = () => sex === "g" ? "للبنات" : "للأولاد";
+function setSex(x, save){
+  sex = x === "g" ? "g" : "b";
+  document.body.classList.toggle("boy", sex === "b"); document.body.classList.toggle("girl", sex === "g");
+  $("sexBtn").textContent = sex === "g" ? "👧" : "👦"; $("sexBtn").title = sex === "g" ? "واجهة البنات" : "واجهة الأولاد";
+  document.querySelector('meta[name="theme-color"]').content = sex === "g" ? "#db2777" : "#2563eb";
+  document.querySelectorAll(".pcard").forEach(b => b.classList.toggle("on", b.dataset.sex === sex));
+  if (save){ store.set("sex", sex); toast(sex === "g" ? "👧 واجهة البنات" : "👦 واجهة الأولاد"); }
+}
+setSex(sex || "b");
 
 /* ============ الخلفية السحرية ============ */
 (function(){
@@ -216,7 +270,7 @@ const chBtn = c => `<button class="ch" data-ch="${esc(c.id)}"><div class="ring">
 
 /* خلط المقاطع بالتناوب بين القنوات حتى لا تطغى قناة واحدة */
 function mix(chs){
-  const lists = chs.map(c => (c.v || []).map(x => VID[x[0]]).filter(Boolean)), out = [];
+  const lists = chs.filter(chOk).map(c => (c.v || []).map(x => VID[x[0]]).filter(v => v && vOk(v))), out = [];
   for (let i = 0; lists.some(l => i < l.length); i++) lists.forEach(l => { if (l[i]) out.push(l[i]); });
   return out;
 }
@@ -239,31 +293,40 @@ const io = new IntersectionObserver(es => es.forEach(async e => {
 
 /* ============ الصفحات ============ */
 const navOn = n => document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("on", b.dataset.nav === n));
-const chipsHTML = () => `<div class="chips" id="chips">${D.cats.map(c => `<button class="chip ${state.cat === c.id ? "on" : ""}" data-cat="${c.id}" style="--a:${c.a};--b:${c.b}">${c.ic} ${esc(c.t)}</button>`).join("")}</div>`;
+const catsX = () => [D.cats[0], {id:"mine", t:sexName(), ic:sex === "g" ? "👧" : "👦", a:sex === "g" ? "#f472b6" : "#38bdf8", b:sex === "g" ? "#db2777" : "#2563eb"}].concat(D.cats.slice(1));
+const chipsHTML = () => `<div class="chips" id="chips">${catsX().map(c => `<button class="chip ${state.cat === c.id ? "on" : ""}" data-cat="${c.id}" style="--a:${c.a};--b:${c.b}">${c.ic} ${esc(c.t)}</button>`).join("")}</div>`;
 const feedHTML = () => `<div class="feed" id="feed"></div><div class="more" id="feedEnd"></div>`;
 
 function pageHome(){
   navOn("home");
-  const chs = state.cat === "all" ? D.channels : D.channels.filter(c => c.cats.includes(state.cat)), cat = catOf(state.cat);
+  const own = c => c.g === sex ? 0 : 1;
+  let chs = (state.cat === "all" || state.cat === "mine" ? D.channels : D.channels.filter(c => c.cats.includes(state.cat))).filter(chOk);
+  if (state.cat === "mine") chs = chs.filter(c => c.g === sex || (c.v || []).some(x => VID[x[0]] && VID[x[0]].sx === sex));
+  chs = chs.slice().sort((a, b) => own(a) - own(b));
+  const cat = state.cat === "mine" ? catsX()[1] : catOf(state.cat);
   $("main").innerHTML = chipsHTML() +
-    `<div class="sec">${state.cat === "all" ? "🌟 كل القنوات" : cat.ic + " " + esc(cat.t)} <small>${chs.length} قناة</small></div>
+    `<div class="sec">${state.cat === "all" ? "🌟 كل القنوات" : cat.ic + " " + esc(cat.t)} <span class="mode">${sex === "g" ? "👧 بنات" : "👦 أولاد"}</span> <small>${chs.length} قناة</small></div>
      <div class="shelf">${chs.map(chBtn).join("")}</div><div class="sec">🎬 مقاطع لك</div>` + feedHTML() +
     `<div class="foot">لولوتيوب · قنوات هادفة فقط · تصميم <b>لوجيكال كود</b></div>`;
-  feed(mix(chs));
+  let list = mix(chs);
+  if (state.cat === "mine") list = list.filter(mine);
+  else { const a = list.filter(mine), b = list.filter(v => !mine(v)), m = []; // نقدّم مقاطع الواجهة المختارة أولاً بالتناوب
+    for (let i = 0, j = 0; i < a.length || j < b.length;){ if (i < a.length) m.push(a[i++]); if (j < b.length) m.push(b[j++]); if (j < b.length) m.push(b[j++]); } list = m; }
+  feed(list);
   const on = document.querySelector(".chip.on"); if (on) on.scrollIntoView({inline:"center", block:"nearest"});
 }
 function pageChannel(id){
   navOn("channels");
-  const c = CH[id]; if (!c) return pageHome();
+  const c = CH[id]; if (!c || !chOk(c)) return pageHome();
   const cat = catOf(c.cats[0]);
   $("main").innerHTML = `<div class="banner" style="--a:${cat.a || "#a78bfa"};--b:${cat.b || "#f472b6"}"></div>
     <div class="chead"><div class="ring"><img src="${esc(c.av)}" alt=""></div><div><b>${esc(c.n)}</b><small>${esc(c.s || "")}</small><br><small>${c.cats.map(x => catOf(x).ic + " " + esc(catOf(x).t)).join(" · ")}</small></div></div>` + feedHTML();
-  feed((c.v || []).map(x => VID[x[0]]).filter(Boolean), () => liveChannel(c)); scrollTo(0, 0);
+  feed((c.v || []).map(x => VID[x[0]]).filter(v => v && vOk(v)), async () => (await liveChannel(c)).filter(vOk)); scrollTo(0, 0);
 }
 function pageChannels(){
   navOn("channels");
   $("main").innerHTML = D.cats.filter(c => c.id !== "all").map(cat => {
-    const chs = D.channels.filter(c => c.cats.includes(cat.id)); if (!chs.length) return "";
+    const chs = D.channels.filter(c => c.cats.includes(cat.id) && chOk(c)).sort((a, b) => (a.g === sex ? 0 : 1) - (b.g === sex ? 0 : 1)); if (!chs.length) return "";
     return `<div class="sec">${cat.ic} ${esc(cat.t)} <small>${chs.length}</small></div><div class="cgrid">${chs.map(chBtn).join("")}</div>`;
   }).join("") + `<div class="foot">تصميم <b>لوجيكال كود</b></div>`;
   scrollTo(0, 0);
@@ -280,8 +343,8 @@ function pageSearch(q){
   navOn("");
   const n = s => String(s || "").toLowerCase().replace(/[ً-ْـ]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي");
   const w = n(q).split(/\s+/).filter(Boolean);
-  const chs = D.channels.filter(c => w.every(x => n(c.n).includes(x)));
-  const vs = Object.values(VID).filter(v => w.every(x => n(v.t + " " + (CH[v.c] || {}).n).includes(x))).slice(0, 150);
+  const chs = D.channels.filter(c => chOk(c) && w.every(x => n(c.n).includes(x)));
+  const vs = Object.values(VID).filter(v => vOk(v) && w.every(x => n(v.t + " " + (CH[v.c] || {}).n).includes(x))).slice(0, 150);
   $("main").innerHTML = `<div class="sec">🔍 ${esc(q)} <small>${vs.length} مقطع</small></div>` + (chs.length ? `<div class="shelf">${chs.map(chBtn).join("")}</div>` : "") +
     (vs.length ? feedHTML() : `<div class="empty"><span>🤔</span>لم نجد شيئاً… جرّب كلمة أخرى</div>`);
   if (vs.length) feed(vs);
@@ -292,13 +355,13 @@ function pageWatch(id){
   const v = VID[id]; if (!v) return pageHome();
   const c = CH[v.c] || {};
   hist = [id].concat(hist.filter(x => x !== id)).slice(0, 80); store.set("hist", hist);
-  const all = (c.v || []).map(x => VID[x[0]]).filter(Boolean), i0 = all.findIndex(x => x.id === id);
+  const all = (c.v || []).map(x => VID[x[0]]).filter(x => x && (x.id === id || vOk(x))), i0 = all.findIndex(x => x.id === id);
   const after = all.slice(i0 + 1).concat(all.slice(0, Math.max(i0, 0)));
   const rel = mix(D.channels.filter(x => x.id !== c.id && x.cats.some(k => (c.cats || []).includes(k)))).slice(0, 30);
   // rel=0: يوتيوب يقترح من القناة نفسها فقط. والقائمة تكمل تلقائياً بمقاطع القناة المختارة.
   const src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&playlist=" + [id].concat(after.slice(0, 40).map(x => x.id)).join(",");
   $("main").innerHTML = `<div class="watch">
-    <div><div class="player"><iframe src="${src}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+    <div><div class="player"><iframe src="${src}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>${after[0] ? `<button class="skip" data-v="${after[0].id}" title="تخطي إلى المقطع التالي"><b>⏭</b>تخطي</button>` : ""}</div>
       <div class="wt"><h1>${esc(v.t)}</h1>
         <div class="row"><img src="${esc(c.av)}" alt="" data-ch="${esc(c.id)}"><div class="who" data-ch="${esc(c.id)}"><b>${esc(c.n)}</b><small>${esc(c.s || "")}</small></div>
           <button class="pill ghost" data-heart="${id}">${favs.includes(id) ? "💖 في المفضلة" : "🤍 أحببته"}</button></div></div></div>
@@ -318,8 +381,8 @@ async function liveChannel(c){
         const j = await getJSON(b + (c._lv.tok ? "/nextpage/channel/" + c.id + "?nextpage=" + encodeURIComponent(c._lv.tok) : "/channel/" + c.id));
         c._lv.tok = j.nextpage || null; if (!c._lv.tok) c._lv.end = true;
         const out = [];
-        (j.relatedStreams || []).forEach(s => { const id = ((s.url || "").split("v=")[1] || "").slice(0, 11); if (!id || VID[id] || s.isShort) return;
-          const v = {id, t:s.title, c:c.id, d:hms(s.duration), a:s.uploadedDate || ""}; VID[id] = v; c.v.push([id]); out.push(v); });
+        (j.relatedStreams || []).forEach(s => { const id = ((s.url || "").split("v=")[1] || "").slice(0, 11); if (!id || VID[id] || s.isShort || BAD.test(s.title || "")) return;
+          const v = {id, t:s.title, c:c.id, d:hms(s.duration), a:s.uploadedDate || "", sx:vSex(s.title || "")}; VID[id] = v; c.v.push([id]); out.push(v); });
         if (out.length || c._lv.end) return out;
       }
     } catch(e){}
@@ -335,6 +398,9 @@ function route(){
 }
 window.addEventListener("hashchange", route);
 document.addEventListener("click", e => {
+  const sx = e.target.closest("[data-sex]");
+  if (sx){ setSex(sx.dataset.sex, true); $("pick").classList.remove("open"); route(); scrollTo(0, 0); return; }
+  if (e.target.id === "pick" && sex){ $("pick").classList.remove("open"); return; }
   const hb = e.target.closest("[data-heart]");
   if (hb){ e.stopPropagation(); const id = hb.dataset.heart, on = !favs.includes(id);
     favs = on ? [id].concat(favs) : favs.filter(x => x !== id); store.set("favs", favs);
@@ -346,16 +412,18 @@ document.addEventListener("click", e => {
   const n = e.target.closest("[data-nav]"); if (n){ const h = n.dataset.nav === "home" ? "#/" : "#/" + n.dataset.nav; if (location.hash === h) route(); else location.hash = h; return; }
 });
 $("home").onclick = () => { if (location.hash && location.hash !== "#/") location.hash = "#/"; else pageHome(); scrollTo(0, 0); };
+$("sexBtn").onclick = () => $("pick").classList.add("open");
 $("searchBtn").onclick = () => { $("search").classList.toggle("open"); if ($("search").classList.contains("open")) $("q").focus(); };
 const doSearch = () => { const q = $("q").value.trim(); if (q) location.hash = "#/s/" + encodeURIComponent(q); };
 $("go").onclick = doSearch; $("q").addEventListener("keydown", e => { if (e.key === "Enter") doSearch(); });
 
 /* ============ البداية ============ */
 state.cat = store.get("cat", "all");
-fetch("data.json?v=1").then(r => r.json()).then(d => {
-  D = d; D.channels.forEach(c => { CH[c.id] = c; (c.v || []).forEach(x => { VID[x[0]] = {id:x[0], t:x[1], c:c.id, d:x[2] || "", a:x[3] || ""}; }); });
-  if (!D.cats.some(c => c.id === state.cat)) state.cat = "all";
+fetch("data.json?v=3").then(r => r.json()).then(d => {
+  D = d; D.channels.forEach(c => { CH[c.id] = c; (c.v || []).forEach(x => { VID[x[0]] = {id:x[0], t:x[1], c:c.id, d:x[2] || "", a:x[3] || "", sx:vSex(x[1])}; }); });
+  if (state.cat !== "mine" && !D.cats.some(c => c.id === state.cat)) state.cat = "all";
   route();
+  if (firstTime) $("pick").classList.add("open");
 }).catch(() => { $("main").innerHTML = '<div class="empty"><span>😕</span>تعذّر التحميل، أعد فتح الصفحة</div>'; });
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 </script>

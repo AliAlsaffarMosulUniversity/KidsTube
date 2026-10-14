@@ -376,18 +376,31 @@ function pageWatch(id){
   const c = CH[v.c] || {};
   hist = [id].concat(hist.filter(x => x !== id)).slice(0, 80); store.set("hist", hist);
   const all = (c.v || []).map(x => VID[x[0]]).filter(x => x && (x.id === id || vOk(x))), i0 = all.findIndex(x => x.id === id);
-  const after = all.slice(i0 + 1).concat(all.slice(0, Math.max(i0, 0)));
-  const rel = mix(D.channels.filter(x => x.id !== c.id && x.cats.some(k => (c.cats || []).includes(k)))).slice(0, 30);
+  const own = all.slice(i0 + 1).concat(all.slice(0, Math.max(i0, 0)));
+  // تنويع: كل مقطع من قناة مختلفة حتى لا يملّ الطفل
+  const seenV = new Set(hist.slice(0, 40));
+  const shuf = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const near = shuf(D.channels.filter(x => x.id !== c.id && chOk(x) && x.cats.some(k => (c.cats || []).includes(k))));
+  const far = shuf(D.channels.filter(x => x.id !== c.id && chOk(x) && !near.includes(x)));
+  const pick = ch => shuf((ch.v || []).map(x => VID[x[0]]).filter(v => v && vOk(v) && !seenV.has(v.id))).slice(0, 2);
+  const pools = near.concat(far).map(pick).filter(l => l.length), others = [];
+  for (let r = 0; r < 2; r++) pools.forEach(l => { if (l[r]) others.push(l[r]); });
+  const after = [];
+  for (let i = 0, j = 0; after.length < 60 && (i < others.length || j < own.length);){
+    if (i < others.length) after.push(others[i++]);
+    if (i < others.length) after.push(others[i++]);
+    if (j < own.length) after.push(own[j++]);   // مقطع واحد من نفس القناة كل 3 مقاطع
+  }
+  const rel = [];
   // rel=0: يوتيوب يقترح من القناة نفسها فقط. والقائمة تكمل تلقائياً بمقاطع القناة المختارة.
-  const src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&playlist=" + [id].concat(after.slice(0, 40).map(x => x.id)).join(",");
+  const src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1&iv_load_policy=3&hl=ar&playlist=" + [id].concat(after.slice(0, 50).map(x => x.id)).join(",");
   $("main").innerHTML = `<div class="watch">
     <div><div class="player"><iframe src="${src}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write; web-share; accelerometer; gyroscope" allowfullscreen></iframe></div>
       <div class="wt"><h1>${esc(v.t)}</h1>
         <div class="row"><img src="${esc(c.av)}" alt="" data-ch="${esc(c.id)}"><div class="who" data-ch="${esc(c.id)}"><b>${esc(c.n)}</b><small>${esc(c.s || "")}</small></div>
-          <button class="pill ghost" data-heart="${id}">${favs.includes(id) ? "💖 في المفضلة" : "🤍 أحببته"}</button></div>
-        <button class="pill full" id="fullBtn">📺 شاشة كاملة بالعرض</button></div></div>
+          <button class="pill ghost" data-heart="${id}">${favs.includes(id) ? "💖 في المفضلة" : "🤍 أحببته"}</button></div></div></div>
     <div class="next"><div class="sec">⏭️ التالي</div>${feedHTML()}</div></div>`;
-  feed(after.slice(0, 24).concat(rel)); scrollTo(0, 0);
+  feed(after); scrollTo(0, 0);
 }
 
 /* ============ جلب مقاطع أقدم من القناة (مصدر مفتوح، اختياري) ============ */
